@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
 <style>
   :root{
     --bg:#0B0C0E;
@@ -271,6 +272,79 @@
     .proj-stack span{font-size:10.5px;}
   }
 
+  /* ── AR / VR MOTION GRAPHICS ── */
+
+  /* Hero: depth-grid overlay */
+  .hero{position:relative; overflow:hidden;}
+  #ar-canvas{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:.5;}
+
+  /* Hero: subtle grid lines */
+  .hero::before{
+    content:'';
+    position:absolute; inset:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,106,61,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,106,61,.045) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 80% 70% at 50% 50%, black 10%, transparent 80%);
+    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%, black 10%, transparent 80%);
+  }
+
+  /* Stats: accent glow on numbers */
+  .stat .num{text-shadow:0 0 24px rgba(255,106,61,.18);}
+
+  /* Section head: scan-line reveal on number */
+  .section-head .no{position:relative; display:inline-block;}
+  .section-head .no::after{
+    content:'';
+    position:absolute; left:0; bottom:-3px; right:0; height:1px;
+    background:var(--accent);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform .55s cubic-bezier(.16,1,.3,1) .1s;
+  }
+  .section-head.scan-in .no::after{transform:scaleX(1);}
+
+  /* Project rows: 3D tilt container */
+  .proj-list{perspective:1200px;}
+  .proj-row{transform-style:preserve-3d; transition:transform .25s ease, padding-left .25s ease, box-shadow .25s ease;}
+  @media (hover:hover){
+    .proj-row:hover{box-shadow:0 12px 40px rgba(0,0,0,.45);}
+  }
+
+  /* AR corner brackets on project rows */
+  .proj-row{position:relative;}
+  .proj-row::before,.proj-row::after{
+    content:'';
+    position:absolute; left:0;
+    width:10px; height:10px;
+    opacity:0;
+    transition:opacity .25s ease;
+    pointer-events:none;
+  }
+  .proj-row::before{top:6px; border-top:1px solid var(--accent); border-left:1px solid var(--accent);}
+  .proj-row::after{bottom:6px; border-bottom:1px solid var(--accent); border-left:1px solid var(--accent);}
+  @media (hover:hover){.proj-row:hover::before,.proj-row:hover::after{opacity:1;}}
+
+  /* Skill chips: subtle shimmer on hover */
+  .chips span{position:relative; overflow:hidden;}
+  .chips span::after{
+    content:'';
+    position:absolute; top:0; left:-100%; width:60%; height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+    transition:left .4s ease;
+    pointer-events:none;
+  }
+  .chips span:hover::after{left:140%;}
+
+  /* Eyebrow: pulsing accent dot */
+  @keyframes pulse-dot{0%,100%{opacity:.6;}50%{opacity:1;}}
+  .hero .eyebrow::before{
+    content:'';
+    display:inline-block; width:5px; height:5px; border-radius:50%;
+    background:var(--accent); margin-right:8px; vertical-align:middle;
+    animation:pulse-dot 2s ease-in-out infinite;
+  }
+
   /* HERO ENTRANCE (page load — GPU composited) */
   @keyframes fadeUp{from{opacity:0;transform:translate3d(0,18px,0);}to{opacity:1;transform:translate3d(0,0,0);}}
   @keyframes fadeUpSm{from{opacity:0;transform:translate3d(0,10px,0);}to{opacity:1;transform:translate3d(0,0,0);}}
@@ -287,6 +361,56 @@
     .hero p.lead{animation-name:fadeUpSm; animation-delay:.22s;}
     .cta-row{animation-name:fadeUpSm; animation-delay:.28s;}
   }
+
+  /* ── ANIMATED ICONS ── */
+  i[data-lucide]{display:inline-flex; align-items:center; justify-content:center; line-height:1;}
+
+  /* Stat icons */
+  .stat-icon{color:var(--accent); margin-bottom:12px;}
+  .stat-icon svg{width:22px; height:22px; stroke-width:1.6;}
+  @keyframes icon-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+  .stat:nth-child(1) .stat-icon svg{animation:icon-float 3.2s ease-in-out infinite;}
+  .stat:nth-child(2) .stat-icon svg{animation:icon-float 3.2s ease-in-out .6s infinite;}
+  .stat:nth-child(3) .stat-icon svg{animation:icon-float 3.2s ease-in-out 1.2s infinite;}
+  .stat:nth-child(4) .stat-icon svg{animation:icon-float 3.2s ease-in-out 1.8s infinite;}
+
+  /* Section head icons */
+  .sh-icon{display:inline-flex; align-items:center; gap:7px; color:var(--accent);}
+  .sh-icon svg{width:16px; height:16px; stroke-width:1.8; transition:transform .5s cubic-bezier(.16,1,.3,1);}
+  .section-head.scan-in .sh-icon svg{transform:rotate(360deg);}
+
+  /* Experience bullet icon */
+  .exp-co-icon{display:inline-flex; align-items:center; gap:6px; color:var(--accent); margin-bottom:14px;}
+  .exp-co-icon svg{width:15px; height:15px; stroke-width:1.8;}
+  @keyframes icon-pulse{0%,100%{opacity:.7; transform:scale(1);}50%{opacity:1; transform:scale(1.15);}}
+  .exp-co-icon svg{animation:icon-pulse 2.4s ease-in-out infinite;}
+
+  /* Footer link icons */
+  .foot-links a{display:flex; align-items:center; gap:9px;}
+  .foot-links a svg{width:14px; height:14px; stroke-width:1.8; flex-shrink:0; transition:transform .25s cubic-bezier(.16,1,.3,1), color .2s ease;}
+  .foot-links a:hover svg{transform:scale(1.25) translateX(2px); color:var(--accent);}
+
+  /* Button icons */
+  .btn svg{width:14px; height:14px; stroke-width:2; flex-shrink:0; transition:transform .2s ease;}
+  .btn-primary:hover svg{transform:translateX(4px);}
+  .btn-ghost:hover svg{transform:translateY(3px);}
+  .btn-line:hover svg{transform:translateX(3px);}
+
+  /* Skill category icons */
+  .skill-cat-head{display:flex; align-items:center; gap:7px; margin-bottom:18px;}
+  .skill-cat-head svg{width:13px; height:13px; stroke-width:2; color:var(--accent);}
+  @keyframes spin-in{from{transform:rotate(-90deg); opacity:0;}to{transform:rotate(0deg); opacity:1;}}
+  .skill-cols .reveal.in .skill-cat-head svg{animation:spin-in .5s cubic-bezier(.16,1,.3,1) both;}
+
+  /* Award icon */
+  .award-icon{color:var(--accent); display:inline-flex; align-items:center;}
+  .award-icon svg{width:14px; height:14px; stroke-width:2;}
+  @keyframes trophy-bounce{0%,100%{transform:translateY(0) rotate(0);}30%{transform:translateY(-4px) rotate(-5deg);}60%{transform:translateY(-2px) rotate(3deg);}}
+  .award-icon svg{animation:trophy-bounce 3s ease-in-out 2s infinite;}
+
+  /* Project link icons */
+  .proj-link-icon svg{width:12px; height:12px; stroke-width:2; transition:transform .2s ease; display:inline-flex;}
+  a:hover .proj-link-icon svg{transform:translate(2px,-2px);}
 
   @media (prefers-reduced-motion: reduce){ *{transition:none !important; animation:none !important;} html{scroll-behavior:auto;} }
 </style>
@@ -314,31 +438,32 @@
 </nav>
 
 <header class="hero">
+  <canvas id="ar-canvas" aria-hidden="true"></canvas>
   <div class="wrap hero-inner">
     <span class="eyebrow">Business Operations · Delhi NCR</span>
     <h1>Aayush Dhiman</h1>
     <div class="role">Assistant Manager, Business Operations — CURRYiT</div>
     <p class="lead">I manage D2C and B2B fulfilment across 50+ warehouses on quick-commerce platforms, and build the dashboards, sheets, and small tools that keep operations running without manual firefighting.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#projects">View Projects</a>
-      <a class="btn btn-line" href="#contact">Get in Touch</a>
-      <a class="btn btn-ghost" href="Aayush_Dhiman_Resume.pdf" download="Aayush_Dhiman_Resume.pdf">Download CV ↓</a>
+      <a class="btn btn-primary" href="#projects">View Projects <i data-lucide="arrow-right"></i></a>
+      <a class="btn btn-line" href="#contact">Get in Touch <i data-lucide="send"></i></a>
+      <a class="btn btn-ghost" href="Aayush_Dhiman_Resume.pdf" download="Aayush_Dhiman_Resume.pdf">Download CV <i data-lucide="download"></i></a>
     </div>
   </div>
 </header>
 
 <div class="stats">
   <div class="wrap stats-grid">
-    <div class="stat reveal" data-delay="1"><div class="num" data-target="3" data-display="2–3 hrs">2–3 hrs</div><div class="cap">saved daily through automation</div></div>
-    <div class="stat reveal" data-delay="2"><div class="num" data-target="90" data-display="80–90%">80–90%</div><div class="cap">reduction in operational errors</div></div>
-    <div class="stat reveal" data-delay="3"><div class="num" data-target="50" data-display="50+">50+</div><div class="cap">warehouses managed</div></div>
-    <div class="stat reveal" data-delay="4"><div class="num" data-target="600" data-display="500–600">500–600</div><div class="cap">POs coordinated / month</div></div>
+    <div class="stat reveal" data-delay="1"><div class="stat-icon"><i data-lucide="clock"></i></div><div class="num" data-target="3" data-display="2–3 hrs">2–3 hrs</div><div class="cap">saved daily through automation</div></div>
+    <div class="stat reveal" data-delay="2"><div class="stat-icon"><i data-lucide="trending-down"></i></div><div class="num" data-target="90" data-display="80–90%">80–90%</div><div class="cap">reduction in operational errors</div></div>
+    <div class="stat reveal" data-delay="3"><div class="stat-icon"><i data-lucide="building-2"></i></div><div class="num" data-target="50" data-display="50+">50+</div><div class="cap">warehouses managed</div></div>
+    <div class="stat reveal" data-delay="4"><div class="stat-icon"><i data-lucide="package"></i></div><div class="num" data-target="600" data-display="500–600">500–600</div><div class="cap">POs coordinated / month</div></div>
   </div>
 </div>
 
 <section id="about">
   <div class="wrap reveal">
-    <div class="section-head"><span class="no">01</span><h2>What I actually do</h2></div>
+    <div class="section-head"><span class="no">01</span><h2><span class="sh-icon"><i data-lucide="user"></i></span>What I actually do</h2></div>
     <div class="about">
       <p>I'm an Assistant Manager – Business Operations at <strong>CURRYiT</strong>, where I manage end-to-end D2C order fulfilment and B2B logistics across platforms like Blinkit, Zepto, Swiggy Instamart, BigBasket, Amazon, and FirstClub. Day to day, that means dispatch planning, vendor and warehouse coordination, and tracking KPIs like OFD delays, RTO reasons, and missing GRNs.</p>
       <p>I also build the tools that make that process lighter — Google Apps Script automations, tracking sheets, and small dashboards — whenever a manual process becomes repetitive enough to fix properly.</p>
@@ -348,7 +473,7 @@
 
 <section id="experience" style="background:var(--panel); border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft);">
   <div class="wrap reveal">
-    <div class="section-head"><span class="no">02</span><h2>Where I've worked</h2></div>
+    <div class="section-head"><span class="no">02</span><h2><span class="sh-icon"><i data-lucide="briefcase"></i></span>Where I've worked</h2></div>
     <div class="exp-item">
       <div class="exp-top">
         <div class="exp-title">Assistant Manager – Business Operations, CURRYiT</div>
@@ -367,13 +492,29 @@
 
 <section id="projects">
   <div class="wrap reveal">
-    <div class="section-head"><span class="no">03</span><h2>Things I've built</h2></div>
+    <div class="section-head"><span class="no">03</span><h2><span class="sh-icon"><i data-lucide="code-2"></i></span>Things I've built</h2></div>
     <div class="proj-list">
 
       <div class="proj-row reveal" data-delay="1">
         <div class="proj-left">
+          <h3>This Portfolio</h3>
+          <div class="yr">2026</div>
+        </div>
+        <div>
+          <p class="proj-desc">Designed and built this portfolio site from scratch — a single-file dark minimal HTML/CSS/JS site with scroll animations, mobile hamburger nav, animated stat counters, and project showcases. Hosted on Vercel via GitHub.</p>
+          <p class="proj-impact">Built with Claude AI, deployed in hours.</p>
+          <div class="proj-stack"><span>HTML / CSS / JS</span><span>Claude AI</span><span>GitHub</span><span>Vercel</span></div>
+          <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="https://github.com/Aayushdhiman22/aayushdhiman.github.io" target="_blank" rel="noopener" style="font-size:12.5px; font-family:var(--mono); color:var(--slate-dim); border-bottom:1px solid var(--line); padding-bottom:2px; transition:color .2s ease, border-color .2s ease;" onmouseover="this.style.color='var(--ink-soft)';this.style.borderColor='var(--slate-dim)'" onmouseout="this.style.color='var(--slate-dim)';this.style.borderColor='var(--line)'">GitHub →</a>
+            <a href="https://aayushdhiman.vercel.app" target="_blank" rel="noopener" style="font-size:12.5px; font-family:var(--mono); color:var(--slate-dim); border-bottom:1px solid var(--line); padding-bottom:2px; transition:color .2s ease, border-color .2s ease;" onmouseover="this.style.color='var(--ink-soft)';this.style.borderColor='var(--slate-dim)'" onmouseout="this.style.color='var(--slate-dim)';this.style.borderColor='var(--line)'">Live site →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-row reveal" data-delay="1">
+        <div class="proj-left">
           <h3>CurryIT Attendance System</h3>
-          <div class="yr">2025</div>
+          <div class="yr">2026</div>
         </div>
         <div>
           <p class="proj-desc">Live attendance app with geolocation check-in, leave workflows, and role-based access for employees, managers, and admins. Also built a self-contained version with JWT auth.</p>
@@ -387,7 +528,7 @@
       <div class="proj-row reveal" data-delay="1">
         <div class="proj-left">
           <h3>Dispatch Analytics Dashboard</h3>
-          <div class="yr">2025</div>
+          <div class="yr">2026</div>
         </div>
         <div>
           <p class="proj-desc">Turns raw dispatch Excel exports into a single shareable dashboard: shipped-quantity trends, brand/warehouse breakdowns, status tracking across Blinkit, Swiggy, Zepto, BigBasket &amp; FirstClub.</p>
@@ -400,7 +541,7 @@
       <div class="proj-row reveal" data-delay="1">
         <div class="proj-left">
           <h3>Box Sticker Generator</h3>
-          <div class="yr">2024</div>
+          <div class="yr">2026</div>
         </div>
         <div>
           <p class="proj-desc">Reads warehouse Excel sheets and auto-generates branded A5 box stickers as print-ready PDFs.</p>
@@ -413,7 +554,7 @@
       <div class="proj-row reveal" data-delay="1">
         <div class="proj-left">
           <h3>D2C Packaging Sheet Automation</h3>
-          <div class="yr">2024</div>
+          <div class="yr">2025</div>
         </div>
         <div>
           <p class="proj-desc">AI-assisted Google Apps Script tool that handles data formatting, duplicate removal, and multi-sheet generation for packaging references.</p>
@@ -425,7 +566,7 @@
       <div class="proj-row reveal" data-delay="1">
         <div class="proj-left">
           <h3>GRN Tracker</h3>
-          <div class="yr">2024</div>
+          <div class="yr">2025</div>
         </div>
         <div>
           <p class="proj-desc">Tracks Goods Receipt Notes against purchase orders to flag missing or delayed GRNs across 50+ warehouses.</p>
@@ -446,32 +587,16 @@
         </div>
       </div>
 
-      <div class="proj-row reveal" data-delay="1">
-        <div class="proj-left">
-          <h3>This Portfolio</h3>
-          <div class="yr">2026</div>
-        </div>
-        <div>
-          <p class="proj-desc">Designed and built this portfolio site from scratch — a single-file dark minimal HTML/CSS/JS site with scroll animations, mobile hamburger nav, animated stat counters, and project showcases. Hosted on Vercel via GitHub.</p>
-          <p class="proj-impact">Built with Claude AI, deployed in hours.</p>
-          <div class="proj-stack"><span>HTML / CSS / JS</span><span>Claude AI</span><span>GitHub</span><span>Vercel</span></div>
-          <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
-            <a href="https://github.com/Aayushdhiman22/aayushdhiman.github.io" target="_blank" rel="noopener" style="font-size:12.5px; font-family:var(--mono); color:var(--slate-dim); border-bottom:1px solid var(--line); padding-bottom:2px; transition:color .2s ease, border-color .2s ease;" onmouseover="this.style.color='var(--ink-soft)';this.style.borderColor='var(--slate-dim)'" onmouseout="this.style.color='var(--slate-dim)';this.style.borderColor='var(--line)'">GitHub →</a>
-            <a href="https://aayushdhiman.vercel.app" target="_blank" rel="noopener" style="font-size:12.5px; font-family:var(--mono); color:var(--slate-dim); border-bottom:1px solid var(--line); padding-bottom:2px; transition:color .2s ease, border-color .2s ease;" onmouseover="this.style.color='var(--ink-soft)';this.style.borderColor='var(--slate-dim)'" onmouseout="this.style.color='var(--slate-dim)';this.style.borderColor='var(--line)'">Live site →</a>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
 
 <section id="skills" style="background:var(--panel); border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft);">
   <div class="wrap reveal">
-    <div class="section-head"><span class="no">04</span><h2>Skills &amp; tools</h2></div>
+    <div class="section-head"><span class="no">04</span><h2><span class="sh-icon"><i data-lucide="zap"></i></span>Skills &amp; tools</h2></div>
     <div class="skill-cols">
-      <div>
-        <h3>Operations</h3>
+      <div class="reveal">
+        <div class="skill-cat-head"><i data-lucide="layers"></i><h3 style="margin-bottom:0;">Operations</h3></div>
         <div class="chips">
           <span>MIS Reporting &amp; Dashboarding</span><span>Demand Planning</span>
           <span>D2C &amp; B2B Logistics</span><span>Supply Chain Coordination</span>
@@ -479,8 +604,8 @@
           <span>Stakeholder Coordination</span>
         </div>
       </div>
-      <div>
-        <h3>Tools &amp; Tech</h3>
+      <div class="reveal" data-delay="1">
+        <div class="skill-cat-head"><i data-lucide="terminal"></i><h3 style="margin-bottom:0;">Tools &amp; Tech</h3></div>
         <div class="chips">
           <span>Advanced Excel</span><span>Google Sheets</span><span>Google Apps Script</span>
           <span>Shiprocket Cargo</span><span>Amazon Seller Central</span>
@@ -493,7 +618,7 @@
 
 <section id="education">
   <div class="wrap reveal">
-    <div class="section-head"><span class="no">05</span><h2>Education &amp; recognition</h2></div>
+    <div class="section-head"><span class="no">05</span><h2><span class="sh-icon"><i data-lucide="graduation-cap"></i></span>Education &amp; recognition</h2></div>
     <div class="edu-grid">
       <div class="edu-card reveal" data-delay="1">
         <div class="deg">MBA — Operations Management &amp; Finance</div>
@@ -514,7 +639,7 @@
         <div class="sch">Kendriya Vidyalaya, Muzaffarnagar</div>
       </div>
     </div>
-    <div class="award-line reveal" data-delay="5"><span class="mark">—</span><span>Awarded the <strong>"Rising Dough Award"</strong> for performance excellence at CURRYiT.</span></div>
+    <div class="award-line reveal" data-delay="5"><span class="award-icon"><i data-lucide="trophy"></i></span><span>Awarded the <strong>"Rising Dough Award"</strong> for performance excellence at CURRYiT.</span></div>
   </div>
 </section>
 
@@ -526,9 +651,9 @@
         <p class="sub">Open to conversations on operations, automation, and supply chain. Based in Delhi NCR.</p>
       </div>
       <div class="foot-links">
-        <a href="mailto:aayushdhimanok@gmail.com">aayushdhimanok@gmail.com</a>
-        <a href="tel:+919720814681">+91 97208 14681</a>
-        <a href="https://www.linkedin.com/in/aayushdiman22/" target="_blank" rel="noopener">linkedin.com/in/aayushdiman22</a>
+        <a href="mailto:aayushdhimanok@gmail.com"><i data-lucide="mail"></i>aayushdhimanok@gmail.com</a>
+        <a href="tel:+919720814681"><i data-lucide="phone"></i>+91 97208 14681</a>
+        <a href="https://www.linkedin.com/in/aayushdiman22/" target="_blank" rel="noopener"><i data-lucide="linkedin"></i>linkedin.com/in/aayushdiman22</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -552,6 +677,87 @@
       navLinks.classList.remove('open');
     });
   });
+
+  // Initialise Lucide icons
+  if(typeof lucide !== 'undefined') lucide.createIcons();
+  else document.addEventListener('DOMContentLoaded', ()=>{ if(typeof lucide !== 'undefined') lucide.createIcons(); });
+
+  // ── AR PARTICLE DEPTH FIELD (hero canvas) ──
+  (function(){
+    const canvas = document.getElementById('ar-canvas');
+    const ctx = canvas.getContext('2d');
+    let pts = [], W, H, raf;
+    const N = window.innerWidth < 600 ? 28 : 45;
+
+    function resize(){
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+      pts = Array.from({length:N}, () => ({
+        x:Math.random()*W, y:Math.random()*H,
+        vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25,
+        r:Math.random()*1.2+.4
+      }));
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      for(let i=0;i<pts.length;i++){
+        const p=pts[i];
+        // connection lines
+        for(let j=i+1;j<pts.length;j++){
+          const q=pts[j];
+          const d=Math.hypot(p.x-q.x,p.y-q.y);
+          if(d<110){
+            ctx.beginPath();
+            ctx.strokeStyle=`rgba(255,106,61,${(1-d/110)*.1})`;
+            ctx.lineWidth=.6;
+            ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
+            ctx.stroke();
+          }
+        }
+        // dot
+        ctx.beginPath();
+        ctx.fillStyle='rgba(255,106,61,.22)';
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+        // move + bounce
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0||p.x>W) p.vx*=-1;
+        if(p.y<0||p.y>H) p.vy*=-1;
+      }
+      raf=requestAnimationFrame(draw);
+    }
+
+    // Pause when hero scrolls out of view (performance)
+    const heroObs = new IntersectionObserver(([e])=>{
+      if(e.isIntersecting){ draw(); } else { cancelAnimationFrame(raf); }
+    },{threshold:0});
+    heroObs.observe(document.querySelector('.hero'));
+
+    window.addEventListener('resize', ()=>{ clearTimeout(window._rsz); window._rsz=setTimeout(resize,120); });
+    resize();
+  })();
+
+  // ── 3D TILT on project rows (desktop only) ──
+  if(window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.proj-row').forEach(card=>{
+      card.addEventListener('mousemove',e=>{
+        const r=card.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5;
+        const y=(e.clientY-r.top)/r.height-.5;
+        card.style.transform=`perspective(1000px) rotateX(${-y*3}deg) rotateY(${x*4}deg)`;
+      });
+      card.addEventListener('mouseleave',()=>{ card.style.transform=''; });
+    });
+  }
+
+  // ── SCAN-LINE reveal on section numbers ──
+  const scanObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('scan-in'); scanObs.unobserve(e.target); }
+    });
+  },{threshold:.3});
+  document.querySelectorAll('.section-head').forEach(h=>scanObs.observe(h));
 
   // Hide broken project screenshot images gracefully
   document.querySelectorAll('.project-shot img').forEach(img => {
