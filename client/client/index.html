@@ -144,32 +144,84 @@
   .foot-links a:hover{color:var(--ink);}
   .foot-bottom{margin-top:56px; padding-top:22px; border-top:1px solid var(--line-soft); font-size:11.5px; color:var(--slate-dim); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-family:var(--mono);}
 
+  /* HAMBURGER */
+  .hamburger{display:none; flex-direction:column; justify-content:center; gap:5px; cursor:pointer; background:none; border:none; padding:6px; border-radius:3px;}
+  .hamburger span{display:block; width:22px; height:2px; background:var(--ink); border-radius:1px; transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0; transform:scaleX(0);}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
   /* MOBILE */
   @media (max-width:768px){
-    .wrap{padding:0 18px;}
-    nav .row{height:auto; padding:14px 0; flex-wrap:wrap; gap:12px;}
-    nav ul{display:flex; gap:14px; overflow-x:auto; white-space:nowrap; padding-bottom:4px;}
-    .hero{padding:80px 0 60px;}
-    .hero h1{font-size:38px; line-height:1.05;}
-    .hero .role, .hero p.lead{font-size:15px;}
-    .cta-row{flex-direction:column; align-items:stretch; gap:12px;}
-    .btn-primary{text-align:center; justify-content:center;}
-    .btn-ghost{text-align:center; justify-content:center;}
-    .stats-grid{grid-template-columns:1fr 1fr; padding:24px 0;}
-    .stat{border-left:none; padding:16px 0; border-bottom:1px solid var(--line-soft);}
-    .section-head{flex-direction:column; gap:6px; margin-bottom:28px;}
-    section{padding:64px 0;}
-    .exp-top, .foot-grid, .foot-bottom{flex-direction:column; align-items:flex-start;}
-    .proj-row, .skill-cols{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+
+    /* Nav */
+    nav .row{height:56px; padding:0; position:relative; flex-wrap:nowrap;}
+    nav ul{display:none; flex-direction:column; gap:0; position:absolute; top:56px; left:0; right:0;
+           background:rgba(11,12,14,.97); padding:8px 20px 16px; border-bottom:1px solid var(--line);
+           z-index:100; white-space:normal;}
+    nav ul.open{display:flex;}
+    nav ul li a.navlink{display:block; padding:13px 0; font-size:15px; color:var(--ink-soft);
+                        border-bottom:1px solid var(--line-soft);}
+    nav ul li:last-child a.navlink{border-bottom:none;}
+    .hamburger{display:flex;}
+    .nav-cta{display:none;}
+
+    /* Hero */
+    .hero{padding:72px 0 52px;}
+    .hero h1{font-size:36px; line-height:1.06;}
+    .hero .role{font-size:14.5px;}
+    .hero p.lead{font-size:15px; margin-top:20px; margin-bottom:32px;}
+    .cta-row{flex-direction:column; align-items:stretch; gap:10px;}
+    .btn-primary, .btn-ghost{text-align:center; justify-content:center; width:100%;}
+    .btn-line{align-self:flex-start;}
+
+    /* Stats */
+    .stats-grid{grid-template-columns:1fr 1fr; padding:20px 0; gap:0;}
+    .stat{border-left:none; padding:14px 12px; border-bottom:1px solid var(--line-soft);}
+    .stat:nth-child(even){border-left:1px solid var(--line-soft);}
+    .stat .num{font-size:26px;}
+    .stat .cap{font-size:11.5px;}
+
+    /* Sections */
+    section{padding:56px 0;}
+    .section-head{flex-direction:column; gap:5px; margin-bottom:24px;}
+    .section-head h2{font-size:22px;}
+
+    /* Experience */
+    .exp-top{flex-direction:column; align-items:flex-start; gap:5px;}
+    .exp-title{font-size:16px;}
+    .exp-bullets{font-size:14px;}
+
+    /* Projects */
+    .proj-row{grid-template-columns:1fr; gap:12px; padding:22px 0;}
+    .proj-row:hover{padding-left:0;}
+    .proj-desc{font-size:14px;}
+
+    /* Skills */
+    .skill-cols{grid-template-columns:1fr; gap:28px;}
+    .chips span{font-size:12.5px; padding:8px 13px;}
+
+    /* Education */
     .edu-grid{grid-template-columns:1fr;}
-    .edu-card{padding:18px 0;}
+    .edu-card{padding:16px 0;}
     .edu-card:nth-child(odd), .edu-card:nth-child(even){padding-left:0; padding-right:0; border-left:none;}
-  }
-  @media (max-width:480px){
-    .hero h1{font-size:32px;}
-    .stat .num{font-size:24px;}
+
+    /* Footer */
+    footer{padding:52px 0 24px;}
+    .foot-grid{flex-direction:column; gap:28px;}
     footer h2{font-size:26px;}
+    .foot-bottom{flex-direction:column; gap:6px;}
+  }
+
+  @media (max-width:480px){
+    .wrap{padding:0 16px;}
+    .hero{padding:60px 0 44px;}
+    .hero h1{font-size:30px;}
     .stats-grid{grid-template-columns:1fr;}
+    .stat:nth-child(even){border-left:none;}
+    .stat .num{font-size:24px;}
+    footer h2{font-size:22px;}
   }
 
   @media (prefers-reduced-motion: reduce){ *{transition:none !important;} html{scroll-behavior:auto;} }
@@ -181,14 +233,18 @@
   <div class="wrap">
     <div class="row">
       <div class="brand">Aayush Dhiman</div>
-      <ul>
+      <ul id="nav-links">
         <li><a class="navlink" href="#about">About</a></li>
         <li><a class="navlink" href="#experience">Experience</a></li>
         <li><a class="navlink" href="#projects">Projects</a></li>
         <li><a class="navlink" href="#skills">Skills</a></li>
         <li><a class="navlink" href="#education">Education</a></li>
+        <li><a class="navlink" href="#contact">Contact</a></li>
       </ul>
       <a class="nav-cta" href="#contact">Contact</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
@@ -202,7 +258,7 @@
     <div class="cta-row">
       <a class="btn btn-primary" href="#projects">View Projects</a>
       <a class="btn btn-line" href="#contact">Get in Touch</a>
-      <a class="btn btn-ghost" href="#" id="resume-btn" download>Download CV ↓</a>
+      <a class="btn btn-ghost" href="Aayush_Dhiman_Resume.pdf" download="Aayush_Dhiman_Resume.pdf">Download CV ↓</a>
     </div>
   </div>
 </header>
@@ -259,6 +315,8 @@
           <p class="proj-desc">Live attendance app with geolocation check-in, leave workflows, and role-based access for employees, managers, and admins. Also built a self-contained version with JWT auth.</p>
           <p class="proj-impact">Replaced manual attendance with one source of truth.</p>
           <div class="proj-stack"><span>Firebase</span><span>React</span><span>TypeScript</span><span>Supabase</span></div>
+          <div class="project-shot"><img src="img/attendance-login.png" alt="Attendance System login screen"></div>
+          <div class="project-shot" style="margin-top:10px;"><img src="img/attendance-dashboard.png" alt="Attendance System dashboard"></div>
         </div>
       </div>
 
@@ -271,6 +329,7 @@
           <p class="proj-desc">Turns raw dispatch Excel exports into a single shareable dashboard: shipped-quantity trends, brand/warehouse breakdowns, status tracking across Blinkit, Swiggy, Zepto, BigBasket &amp; FirstClub.</p>
           <p class="proj-impact">One HTML file, zero installs — opens anywhere.</p>
           <div class="proj-stack"><span>Chart.js</span><span>Excel</span><span>HTML</span></div>
+          <div class="project-shot"><img src="img/dispatch-dashboard.png" alt="Dispatch Analytics Dashboard"></div>
         </div>
       </div>
 
@@ -283,6 +342,7 @@
           <p class="proj-desc">Reads warehouse Excel sheets and auto-generates branded A5 box stickers as print-ready PDFs.</p>
           <p class="proj-impact">Cuts manual sticker-making out of dispatch.</p>
           <div class="proj-stack"><span>HTML/JS</span><span>Excel parsing</span><span>PDF gen</span></div>
+          <div class="project-shot"><img src="img/box-sticker.png" alt="Box Sticker Generator"></div>
         </div>
       </div>
 
@@ -366,81 +426,4 @@
         <div class="yr">2022</div>
       </div>
       <div class="edu-card">
-        <div class="deg">Class XII — Commerce</div>
-        <div class="sch">Kendriya Vidyalaya, Muzaffarnagar</div>
-      </div>
-      <div class="edu-card">
-        <div class="deg">Class X</div>
-        <div class="sch">Kendriya Vidyalaya, Muzaffarnagar</div>
-      </div>
-    </div>
-    <div class="award-line"><span class="mark">—</span><span>Awarded the <strong>"Rising Dough Award"</strong> for performance excellence at CURRYiT.</span></div>
-  </div>
-</section>
-
-<footer id="contact">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <h2>Let's talk ops.</h2>
-        <p class="sub">Open to conversations on operations, automation, and supply chain. Based in Delhi NCR.</p>
-      </div>
-      <div class="foot-links">
-        <a href="mailto:aayushdhimanok@gmail.com">aayushdhimanok@gmail.com</a>
-        <a href="tel:+919720814681">+91 97208 14681</a>
-        <a href="https://www.linkedin.com/in/aayushdiman22/" target="_blank" rel="noopener">linkedin.com/in/aayushdiman22</a>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <span>© 2026 Aayush Dhiman</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Hide broken project screenshot images gracefully
-  document.querySelectorAll('.project-shot img').forEach(img => {
-    img.addEventListener('error', () => {
-      img.closest('.project-shot').style.display = 'none';
-    });
-  });
-
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.08 });
-  reveals.forEach(r => obs.observe(r));
-
-  // Animated stat counters
-  const statNums = document.querySelectorAll('.stat .num[data-target]');
-  const counterObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target;
-      const target = parseInt(el.dataset.target, 10);
-      const display = el.dataset.display;
-      const duration = 1300;
-      let startTs = null;
-
-      function tick(ts) {
-        if (!startTs) startTs = ts;
-        const elapsed = ts - startTs;
-        const progress = Math.min(elapsed / duration, 1);
-        // Ease-out cubic
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(eased * target);
-        el.textContent = progress >= 1 ? display : current;
-        if (progress < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      counterObs.unobserve(el);
-    });
-  }, { threshold: 0.4 });
-  statNums.forEach(n => counterObs.observe(n));
-</script>
-
-</body>
-</html>
+        <div class="deg">Class X
