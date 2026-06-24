@@ -76,10 +76,10 @@ export default function Home() {
           <div className="max-w-3xl">
             <div className="label mb-6">Business Operations · Delhi NCR</div>
             <h1 className="display-lg mb-6 leading-tight font-bold">
-              I build systems that eliminate operational chaos
+              Automation engineer obsessed with operational efficiency
             </h1>
             <p className="body-lg text-muted-foreground mb-8 max-w-2xl">
-              Assistant Manager at CURRYiT managing D2C and B2B fulfilment across 50+ warehouses. I combine process optimization with automation to create scalable operational infrastructure.
+              I automate the tedious parts of operations so my team can focus on what matters. Managing D2C and B2B fulfilment across 50+ warehouses at CURRYiT—and building the tools that make it all run smoother.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
@@ -124,13 +124,13 @@ export default function Home() {
             className={`scroll-reveal ${isVisible("about") ? "in-view" : ""}`}
           >
             <div className="label mb-4">01 · What I Do</div>
-            <h2 className="display-md mb-8">Building operational excellence through automation</h2>
+            <h2 className="display-md mb-8">Making operations run on autopilot</h2>
             <div className="space-y-6">
               <p className="body-lg text-muted-foreground">
-                I'm an Assistant Manager – Business Operations at <span className="text-foreground font-semibold">CURRYiT</span>, where I manage end-to-end D2C order fulfilment and B2B logistics across platforms like Blinkit, Zepto, Swiggy Instamart, BigBasket, Amazon, and FirstClub.
+                I'm an Assistant Manager – Business Operations at <span className="text-foreground font-semibold">CURRYiT</span>, managing D2C and B2B fulfilment across 50+ warehouses on platforms like Blinkit, Zepto, Swiggy Instamart, BigBasket, Amazon, and FirstClub.
               </p>
               <p className="body-lg text-muted-foreground">
-                Day to day, that means dispatch planning, vendor and warehouse coordination, and tracking KPIs like OFD delays, RTO reasons, and missing GRNs. I also build the tools that make that process lighter — Google Apps Script automations, tracking sheets, and small dashboards — whenever a manual process becomes repetitive enough to fix properly.
+                Most of my time goes to dispatch planning, vendor coordination, and tracking operational KPIs. But the part I love? Building the automations and tools that eliminate the repetitive manual work. Google Apps Script workflows, tracking sheets, dashboards—anything that saves my team time and reduces errors so we can focus on the actual operations work.
               </p>
             </div>
           </div>
