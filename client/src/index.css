@@ -43,74 +43,76 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  /* Premium Portfolio Color System */
+  --primary: #D97706;
+  --primary-foreground: #F5F3F0;
+  --sidebar-primary: #D97706;
+  --sidebar-primary-foreground: #F5F3F0;
+  --chart-1: #D97706;
+  --chart-2: #78A59F;
+  --chart-3: #8B8E96;
+  --chart-4: #D97706;
+  --chart-5: #78A59F;
+  --radius: 0.5rem;
+  --background: #0F1419;
+  --foreground: #F5F3F0;
+  --card: #1A1F28;
+  --card-foreground: #F5F3F0;
+  --popover: #1A1F28;
+  --popover-foreground: #F5F3F0;
+  --secondary: #78A59F;
+  --secondary-foreground: #0F1419;
+  --muted: #8B8E96;
+  --muted-foreground: #C9C9C4;
+  --accent: #D97706;
+  --accent-foreground: #0F1419;
+  --destructive: #EF4444;
+  --destructive-foreground: #F5F3F0;
+  --border: #262C37;
+  --input: #1A1F28;
+  --ring: #D97706;
+  --sidebar: #0F1419;
+  --sidebar-foreground: #F5F3F0;
+  --sidebar-accent: #D97706;
+  --sidebar-accent-foreground: #0F1419;
+  --sidebar-border: #262C37;
+  --sidebar-ring: #D97706;
 }
 
 .dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  /* Dark mode uses same colors as root for premium portfolio */
+  --primary: #D97706;
+  --primary-foreground: #F5F3F0;
+  --sidebar-primary: #D97706;
+  --sidebar-primary-foreground: #F5F3F0;
+  --background: #0F1419;
+  --foreground: #F5F3F0;
+  --card: #1A1F28;
+  --card-foreground: #F5F3F0;
+  --popover: #1A1F28;
+  --popover-foreground: #F5F3F0;
+  --secondary: #78A59F;
+  --secondary-foreground: #0F1419;
+  --muted: #8B8E96;
+  --muted-foreground: #C9C9C4;
+  --accent: #D97706;
+  --accent-foreground: #0F1419;
+  --destructive: #EF4444;
+  --destructive-foreground: #F5F3F0;
+  --border: #262C37;
+  --input: #1A1F28;
+  --ring: #D97706;
+  --chart-1: #D97706;
+  --chart-2: #78A59F;
+  --chart-3: #8B8E96;
+  --chart-4: #D97706;
+  --chart-5: #78A59F;
+  --sidebar: #0F1419;
+  --sidebar-foreground: #F5F3F0;
+  --sidebar-accent: #D97706;
+  --sidebar-accent-foreground: #0F1419;
+  --sidebar-border: #262C37;
+  --sidebar-ring: #D97706;
 }
 
 @layer base {
@@ -119,6 +121,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sora', sans-serif;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -134,24 +142,60 @@
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
+  /* Typography System - Premium Portfolio */
+  .display-lg {
+    @apply text-5xl font-bold tracking-tight;
+    font-family: 'Sora', sans-serif;
+  }
+
+  .display-md {
+    @apply text-4xl font-bold tracking-tight;
+    font-family: 'Sora', sans-serif;
+  }
+
+  .display-sm {
+    @apply text-3xl font-semibold tracking-tight;
+    font-family: 'Sora', sans-serif;
+  }
+
+  .heading-lg {
+    @apply text-2xl font-semibold;
+    font-family: 'Sora', sans-serif;
+  }
+
+  .heading-md {
+    @apply text-xl font-semibold;
+    font-family: 'Sora', sans-serif;
+  }
+
+  .heading-sm {
+    @apply text-lg font-semibold;
+    font-family: 'Sora', sans-serif;
+  }
+
+  .body-lg {
+    @apply text-base font-normal leading-relaxed;
+  }
+
+  .body-md {
+    @apply text-sm font-normal leading-relaxed;
+  }
+
+  .body-sm {
+    @apply text-xs font-normal leading-relaxed;
+  }
+
+  .label {
+    @apply text-xs font-medium uppercase tracking-wider text-muted-foreground;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Custom container utility */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
 
@@ -160,18 +204,83 @@
     min-width: 0;
   }
 
+  /* Accent bar animation */
+  .accent-bar {
+    @apply relative;
+  }
+
+  .accent-bar::before {
+    @apply absolute left-0 bottom-0 h-1 bg-accent;
+    content: '';
+    width: 0;
+    transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .accent-bar:hover::before {
+    width: 100%;
+  }
+
+  /* Scroll reveal animation */
+  .scroll-reveal {
+    @apply opacity-0 translate-y-4;
+  }
+
+  .scroll-reveal.in-view {
+    animation: revealUp 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  @keyframes revealUp {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Staggered reveal for list items */
+  .scroll-reveal-item {
+    @apply opacity-0 translate-y-4;
+  }
+
+  .scroll-reveal-item.in-view {
+    animation: revealUp 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  .scroll-reveal-item:nth-child(1) { animation-delay: 0ms; }
+  .scroll-reveal-item:nth-child(2) { animation-delay: 50ms; }
+  .scroll-reveal-item:nth-child(3) { animation-delay: 100ms; }
+  .scroll-reveal-item:nth-child(4) { animation-delay: 150ms; }
+  .scroll-reveal-item:nth-child(5) { animation-delay: 200ms; }
+
+  /* Hover scale effect */
+  .hover-scale {
+    @apply transition-transform duration-200 ease-out;
+  }
+
+  .hover-scale:hover {
+    @apply scale-102;
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem; /* 32px - desktop padding */
+      padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
+      max-width: 1280px;
     }
   }
 }
