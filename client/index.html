@@ -1209,6 +1209,46 @@
   if(typeof lucide !== 'undefined') lucide.createIcons();
   else document.addEventListener('DOMContentLoaded', ()=>{ if(typeof lucide !== 'undefined') lucide.createIcons(); });
 
+  // ── SECTION HEADING REPEL — heading moves away from mouse cursor ──
+  // Desktop/hover-capable devices only
+  if (window.matchMedia('(hover:hover)').matches) {
+    document.querySelectorAll('.section-head h2').forEach(h2 => {
+      h2.style.willChange = 'transform';
+      h2.style.display    = 'inline-block'; // needed for transform to work on inline element
+
+      let raf = null;
+
+      h2.addEventListener('mousemove', e => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const rect  = h2.getBoundingClientRect();
+          const cx    = rect.left + rect.width  / 2;
+          const cy    = rect.top  + rect.height / 2;
+          const dx    = e.clientX - cx;
+          const dy    = e.clientY - cy;
+          const dist  = Math.sqrt(dx * dx + dy * dy) || 1;
+          const reach = 100;  // px radius of influence
+          const power = 22;   // max px of repulsion
+
+          if (dist < reach) {
+            const force = (1 - dist / reach) * power;
+            const mx = -(dx / dist) * force;
+            const my = -(dy / dist) * force;
+            h2.style.transition = 'transform 0.08s ease';
+            h2.style.transform  = `translate(${mx.toFixed(1)}px, ${my.toFixed(1)}px)`;
+          }
+        });
+      });
+
+      h2.addEventListener('mouseleave', () => {
+        if (raf) cancelAnimationFrame(raf);
+        // Spring back with a satisfying overshoot ease
+        h2.style.transition = 'transform 0.65s cubic-bezier(.16,1,.3,1)';
+        h2.style.transform  = 'translate(0px, 0px)';
+      });
+    });
+  }
+
   // ── AR PARTICLE DEPTH FIELD (hero canvas) ──
   (function(){
     const canvas = document.getElementById('ar-canvas');
