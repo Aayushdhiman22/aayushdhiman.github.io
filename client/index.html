@@ -163,58 +163,23 @@
   .about strong{color:var(--ink); font-weight:500;}
 
   /* EXPERIENCE */
-  .exp-item{padding:30px 0; border-top:1px solid var(--line-soft);}
-  .exp-item:first-of-type{border-top:none; padding-top:0;}
-  .exp-top{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
-  .exp-title{font-family:var(--display); font-weight:600; font-size:18px;}
-  .exp-meta{font-size:12.5px; color:var(--slate-dim); font-family:var(--mono);}
-  .exp-bullets{list-style:none; font-size:15px; color:var(--slate); max-width:680px;}
-  .exp-bullets li{margin-bottom:11px; padding-left:18px; position:relative;}
-  .exp-bullets li::before{content:'—'; position:absolute; left:0; color:var(--slate-dim);}
-  .exp-bullets li b{color:var(--ink-soft); font-weight:500;}
+  .exp-header{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; padding-bottom:20px; border-bottom:1px solid var(--line-soft);}
+  .exp-role-name{font-family:var(--display); font-weight:600; font-size:17px; color:var(--ink);}
+  .exp-role-co{font-size:13px; color:var(--slate); margin-top:4px;}
+  .exp-header-right{display:flex; align-items:center; gap:8px;}
+  .exp-dot{width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px rgba(255,106,61,.5); animation:icon-pulse 2s ease-in-out infinite; flex-shrink:0;}
+  .exp-date{font-family:var(--mono); font-size:12px; color:var(--slate-dim);}
 
-  /* EXPERIENCE — REDESIGNED */
-  .exp-role-header{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:28px; padding-bottom:24px; border-bottom:1px solid var(--line-soft);}
-  .exp-role-left{display:flex; align-items:center; gap:16px;}
-  .exp-role-badge{width:44px; height:44px; border-radius:10px; background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(99,102,241,.1)); border:1px solid rgba(99,102,241,.2); display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0;}
-  .exp-role-badge svg{width:20px; height:20px;}
-  .exp-title{font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink);}
-  .exp-company{font-size:13px; color:var(--slate); margin-top:3px;}
-  .exp-tenure{display:flex; align-items:center; gap:8px;}
-  .exp-dot{width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px rgba(255,106,61,.5); animation:icon-pulse 2s ease-in-out infinite;}
-  .exp-meta{font-size:12px; color:var(--slate-dim); font-family:var(--mono);}
-
-  /* Impact callouts */
-  .exp-impact-row{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); border-radius:8px; overflow:hidden; margin-bottom:36px;}
-  .exp-impact-card{background:#141518; padding:18px 20px; position:relative; overflow:hidden;}
-  .exp-impact-card::after{content:''; position:absolute; bottom:0; left:0; height:2px; width:0; background:linear-gradient(90deg,rgba(99,102,241,.6),transparent); transition:width .6s cubic-bezier(.16,1,.3,1);}
-  .exp-impact-row.in .exp-impact-card::after{width:100%;}
-  .exp-impact-num{font-family:var(--display); font-size:26px; font-weight:700; letter-spacing:-.03em; background:linear-gradient(135deg,#F4F3F0 30%,rgba(147,197,253,.9)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
-  .exp-impact-label{font-size:11.5px; color:var(--slate-dim); margin-top:4px; line-height:1.4;}
-
-  /* Pillar timeline */
-  .exp-timeline{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; position:relative; padding-top:8px;}
-  .exp-timeline::before{content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,rgba(99,102,241,.4),rgba(59,130,246,.2),transparent); width:0; transition:width 1s cubic-bezier(.16,1,.3,1) .3s;}
-  .exp-timeline.in::before{width:100%;}
-  .exp-pillar{padding:20px; border:1px solid var(--line-soft); border-radius:8px; background:#141518; transition:border-color .3s ease, background .3s ease;}
-  .exp-pillar:hover{border-color:rgba(99,102,241,.3); background:#16171b;}
-  .exp-pillar-head{display:flex; align-items:center; gap:8px; margin-bottom:16px; color:var(--accent); font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; font-family:var(--mono);}
-  .exp-pillar-head svg{width:14px; height:14px; stroke-width:2;}
+  /* Grid — same style as edu-grid */
+  .exp-grid{display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--line-soft);}
+  .exp-card{padding:24px 0; border-bottom:1px solid var(--line-soft);}
+  .exp-card:nth-child(odd){padding-right:30px;}
+  .exp-card:nth-child(even){padding-left:30px; border-left:1px solid var(--line-soft);}
+  .exp-card-head{font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;}
   .exp-bullets{list-style:none; font-size:14px; color:var(--slate);}
-  .exp-bullets li{margin-bottom:10px; padding-left:16px; position:relative; line-height:1.55;}
+  .exp-bullets li{margin-bottom:9px; padding-left:15px; position:relative; line-height:1.55;}
   .exp-bullets li::before{content:''; position:absolute; left:0; top:9px; width:5px; height:1px; background:var(--accent); opacity:.6;}
   .exp-bullets li b{color:var(--ink-soft); font-weight:500;}
-
-  @media(max-width:768px){
-    .exp-impact-row{grid-template-columns:1fr 1fr;}
-    .exp-timeline{grid-template-columns:1fr;}
-    .exp-role-header{flex-direction:column; align-items:flex-start;}
-    .exp-impact-num{font-size:22px;}
-  }
-  @media(max-width:480px){
-    .exp-impact-row{grid-template-columns:1fr 1fr;}
-    .exp-impact-card{padding:14px 14px;}
-  }
 
   /* PROJECTS */
   .proj-list{border-top:1px solid var(--line-soft);}
@@ -280,8 +245,7 @@
     .skill-cols{gap:32px;}
     .edu-grid{grid-template-columns:1fr 1fr;}
     section{padding:72px 0;}
-    .exp-impact-row{grid-template-columns:repeat(4,1fr);}
-    .exp-timeline{grid-template-columns:repeat(3,1fr);}
+    .exp-grid{grid-template-columns:1fr 1fr;}
     /* Ambient orbs — scaled for tablet viewport */
     .amb-orb{filter:blur(90px);}
     .amb-orb-1{width:600px; height:600px; top:-180px; left:-150px;}
@@ -352,20 +316,13 @@
     .stat .num{font-size:26px;}
     .stat .cap{font-size:11px;}
 
-    /* Experience new layout */
-    .exp-role-header{padding-bottom:18px; margin-bottom:20px; gap:12px;}
-    .exp-role-badge{width:38px; height:38px;}
-    .exp-title{font-size:15px;}
-    .exp-company{font-size:12px;}
-    .exp-tenure{margin-top:4px;}
-    .exp-impact-row{grid-template-columns:1fr 1fr; gap:0;}
-    .exp-impact-card{padding:14px 14px;}
-    .exp-impact-num{font-size:20px;}
-    .exp-impact-label{font-size:10.5px;}
-    .exp-timeline{grid-template-columns:1fr; gap:12px; padding-top:4px;}
-    .exp-pillar{padding:16px;}
-    .exp-pillar-head{font-size:11px; margin-bottom:12px;}
-    .exp-bullets li{font-size:13.5px; margin-bottom:9px;}
+    /* Experience */
+    .exp-header{flex-direction:column; align-items:flex-start; gap:10px;}
+    .exp-role-name{font-size:15px;}
+    .exp-grid{grid-template-columns:1fr;}
+    .exp-card:nth-child(odd),.exp-card:nth-child(even){padding-left:0; padding-right:0; border-left:none;}
+    .exp-card{padding:18px 0;}
+    .exp-bullets li{font-size:13.5px;}
 
     /* Projects */
     .proj-row{grid-template-columns:1fr; gap:8px; padding:20px 0;}
@@ -425,7 +382,7 @@
     .hero{padding:56px 0 36px;}
     .hero h1{font-size:clamp(26px,8.5vw,34px);}
     .stat .num{font-size:22px;}
-    .exp-impact-num{font-size:18px;}
+
     footer h2{font-size:21px;}
     .chips span{font-size:11.5px; padding:6px 10px;}
   }
@@ -501,7 +458,7 @@
   html{-webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;}
   *{-webkit-tap-highlight-color:transparent;}
   /* GPU layers for all interactive elements */
-  .btn, nav a, .chips span, .proj-row, .exp-pillar, .stat, .edu-card{
+  .btn, nav a, .chips span, .proj-row, .exp-card, .stat, .edu-card{
     transform:translateZ(0);
     backface-visibility:hidden;
   }
@@ -584,17 +541,7 @@
   }
   @media(hover:hover){.proj-row:hover .proj-line{width:100%;}}
 
-  /* 6. Experience timeline: vertical line draws down on reveal */
-  .exp-timeline{position:relative; padding-left:20px;}
-  .exp-timeline::before{
-    content:''; position:absolute; left:0; top:0;
-    width:1px; height:0;
-    background:linear-gradient(180deg,var(--accent),rgba(99,102,241,.4),transparent);
-    transition:height .9s cubic-bezier(.16,1,.3,1) .2s;
-  }
-  .exp-timeline.in::before{height:100%;}
-
-  /* 7. Skill chip: line sweep border on reveal */
+  /* 6. Skill chip: line sweep border on reveal */
   @keyframes chip-border{
     0%  {clip-path:inset(0 100% 0 0);}
     100%{clip-path:inset(0 0% 0 0);}
@@ -873,83 +820,61 @@
     <div class="section-head reveal"><span class="no">02</span><h2><span class="sh-icon"><i data-lucide="briefcase"></i></span>Where I've worked</h2></div>
 
     <!-- Role header -->
-    <div class="exp-role-header reveal">
-      <div class="exp-role-left">
-        <div class="exp-role-badge"><i data-lucide="building-2"></i></div>
-        <div>
-          <div class="exp-title">Assistant Manager — Business Operations</div>
-          <div class="exp-company">CURRYiT &nbsp;·&nbsp; Delhi NCR</div>
-        </div>
+    <div class="exp-header reveal">
+      <div>
+        <div class="exp-role-name">Assistant Manager — Business Operations</div>
+        <div class="exp-role-co">CURRYiT &nbsp;·&nbsp; Delhi NCR</div>
       </div>
-      <div class="exp-tenure">
+      <div class="exp-header-right">
         <span class="exp-dot"></span>
-        <span class="exp-meta">Dec 2024 — Present</span>
+        <span class="exp-date">Dec 2024 — Present</span>
       </div>
     </div>
 
-    <!-- Impact callouts -->
-    <div class="exp-impact-row reveal" data-delay="1">
-      <div class="exp-impact-card">
-        <div class="exp-impact-num">2–3 hrs</div>
-        <div class="exp-impact-label">saved daily via automation</div>
-      </div>
-      <div class="exp-impact-card">
-        <div class="exp-impact-num">80–90%</div>
-        <div class="exp-impact-label">fewer operational errors</div>
-      </div>
-      <div class="exp-impact-card">
-        <div class="exp-impact-num">50+</div>
-        <div class="exp-impact-label">warehouses managed</div>
-      </div>
-      <div class="exp-impact-card">
-        <div class="exp-impact-num">500–600</div>
-        <div class="exp-impact-label">POs coordinated / month</div>
-      </div>
-    </div>
+    <!-- Responsibility grid — edu-style -->
+    <div class="exp-grid">
 
-    <!-- Timeline with 3 pillars -->
-    <div class="exp-timeline reveal" data-delay="2">
-
-      <div class="exp-pillar">
-        <div class="exp-pillar-head">
-          <i data-lucide="package"></i>
-          <span>Fulfillment &amp; Logistics</span>
-        </div>
+      <div class="exp-card reveal" data-delay="1">
+        <div class="exp-card-head">Fulfillment &amp; Logistics</div>
         <ul class="exp-bullets">
-          <li>Managed <b>end-to-end D2C fulfilment</b> on Amazon &amp; website — 40–50 orders daily with high accuracy</li>
-          <li>Coordinated <b>B2B logistics</b> for 500–600 POs/month, executing 20–25 dispatches daily</li>
-          <li>Managed operations across <b>50+ warehouses</b> on Blinkit, Zepto, Swiggy Instamart, BigBasket, Amazon &amp; FirstClub</li>
-          <li>Collaborated with <b>Shiprocket Cargo &amp; Movin</b> for efficient dispatch and delivery planning</li>
+          <li>Managed <b>end-to-end D2C fulfilment</b> on Amazon &amp; website — 40–50 orders daily</li>
+          <li>Coordinated <b>B2B logistics</b> for 500–600 POs/month, 20–25 dispatches daily</li>
+          <li>Operations across <b>50+ warehouses</b> on Blinkit, Zepto, Swiggy Instamart, BigBasket &amp; FirstClub</li>
+          <li>Partnered with <b>Shiprocket Cargo &amp; Movin</b> for dispatch and delivery planning</li>
         </ul>
       </div>
 
-      <div class="exp-pillar">
-        <div class="exp-pillar-head">
-          <i data-lucide="zap"></i>
-          <span>Automation &amp; Efficiency</span>
-        </div>
+      <div class="exp-card reveal" data-delay="2">
+        <div class="exp-card-head">Automation &amp; Efficiency</div>
         <ul class="exp-bullets">
-          <li>Designed <b>Google Apps Script automations</b> (AI-assisted) cutting manual workload by 2–3 hrs/day</li>
-          <li>Built automated workflows for <b>data cleaning, formatting &amp; multi-sheet generation</b></li>
-          <li>Reduced packing &amp; operational errors by <b>80–90%</b>, improving accuracy and customer satisfaction</li>
-          <li>Identified operational gaps and delivered <b>data-backed recommendations</b> to improve efficiency</li>
+          <li>Built <b>Google Apps Script automations</b> cutting manual workload by 2–3 hrs/day</li>
+          <li>Automated <b>data cleaning, formatting &amp; multi-sheet generation</b> workflows</li>
+          <li>Reduced packing &amp; operational errors by <b>80–90%</b></li>
+          <li>Delivered <b>data-backed recommendations</b> to close operational gaps</li>
         </ul>
       </div>
 
-      <div class="exp-pillar">
-        <div class="exp-pillar-head">
-          <i data-lucide="bar-chart-2"></i>
-          <span>Analytics &amp; Reporting</span>
-        </div>
+      <div class="exp-card reveal" data-delay="3">
+        <div class="exp-card-head">Analytics &amp; Reporting</div>
         <ul class="exp-bullets">
-          <li>Developed <b>MIS reports &amp; dashboards</b> tracking sales, dispatch, and inventory performance</li>
-          <li>Prepared <b>demand planning sheets</b> enabling leadership to make data-driven inventory decisions</li>
+          <li>Built <b>MIS reports &amp; dashboards</b> tracking sales, dispatch, and inventory</li>
+          <li>Prepared <b>demand planning sheets</b> for leadership inventory decisions</li>
           <li>Generated <b>weekly performance dashboards</b> for founders and senior management</li>
           <li>Monitored KPIs: <b>OFD delays, RTO reasons, delivery performance, missing GRNs</b></li>
         </ul>
       </div>
 
-    </div><!-- /.exp-timeline -->
+      <div class="exp-card reveal" data-delay="4">
+        <div class="exp-card-head">Key Impact</div>
+        <ul class="exp-bullets">
+          <li><b>2–3 hrs</b> saved daily through automation</li>
+          <li><b>80–90%</b> reduction in operational errors</li>
+          <li><b>500–600</b> POs coordinated per month</li>
+          <li><b>50+</b> warehouses managed across platforms</li>
+        </ul>
+      </div>
+
+    </div><!-- /.exp-grid -->
   </div>
 </section>
 
