@@ -740,6 +740,17 @@
   a:hover .proj-link-icon svg{transform:translate(2px,-2px);}
 
   @media (prefers-reduced-motion: reduce){ *{transition:none !important; animation:none !important;} html{scroll-behavior:auto;} }
+
+  /* NAV — section highlight on anchor click */
+  @keyframes section-flash{
+    0%  { box-shadow: inset 0 3px 0 0 rgba(99,102,241,0), background-color: transparent; }
+    15% { box-shadow: inset 0 3px 0 0 rgba(99,102,241,.7); background-color: rgba(99,102,241,.04); }
+    60% { box-shadow: inset 0 3px 0 0 rgba(99,102,241,.4); background-color: rgba(99,102,241,.025); }
+    100%{ box-shadow: inset 0 3px 0 0 rgba(99,102,241,0); background-color: transparent; }
+  }
+  section.section-flash, footer.section-flash{
+    animation: section-flash 2.4s cubic-bezier(.16,1,.3,1) forwards;
+  }
 </style>
 </head>
 <body>
@@ -1071,11 +1082,24 @@
     ham.classList.toggle('open');
     navLinks.classList.toggle('open');
   });
-  // Close nav when a link is clicked
+  // Close nav when a link is clicked + flash the target section
   navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
+    a.addEventListener('click', (e) => {
       ham.classList.remove('open');
       navLinks.classList.remove('open');
+
+      const href = a.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      // Remove any existing flash, force reflow, re-add
+      target.classList.remove('section-flash');
+      void target.offsetWidth; // reflow to restart animation
+      target.classList.add('section-flash');
+      target.addEventListener('animationend', () => {
+        target.classList.remove('section-flash');
+      }, { once: true });
     });
   });
 
