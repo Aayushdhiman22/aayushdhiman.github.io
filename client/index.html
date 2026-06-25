@@ -62,8 +62,8 @@
   .btn-primary:hover{opacity:.85;}
   .btn-line{color:var(--slate); border-bottom:1px solid var(--line); padding-bottom:3px;}
   .btn-line:hover{color:var(--ink); border-color:var(--ink);}
-  .btn-ghost{color:var(--slate-dim); border:1px solid var(--line); padding:13px 24px; border-radius:3px; transition:border-color .2s ease, color .2s ease;}
-  .btn-ghost:hover{color:var(--ink-soft); border-color:var(--slate-dim);}
+  .btn-ghost{color:var(--slate); border:1px solid var(--slate-dim); padding:13px 24px; border-radius:3px; transition:border-color .2s ease, color .2s ease;}
+  .btn-ghost:hover{color:var(--ink); border-color:var(--slate);}
 
   /* STATS */
   .stats{
@@ -1139,32 +1139,39 @@
     ham.classList.toggle('open');
     navLinks.classList.toggle('open');
   });
+  // Shared: neon border-trace on any anchor → section
+  function sectionFlash(sectionEl) {
+    const old = sectionEl.querySelector('.sbf-overlay');
+    if (old) old.remove();
+    if (getComputedStyle(sectionEl).position === 'static') sectionEl.style.position = 'relative';
+    sectionEl.style.isolation = 'isolate';
+    const ov = document.createElement('div');
+    ov.className = 'sbf-overlay';
+    ov.innerHTML = '<div class="sbf-top"></div><div class="sbf-right"></div><div class="sbf-bottom"></div><div class="sbf-left"></div>';
+    sectionEl.appendChild(ov);
+    setTimeout(() => ov.classList.add('sbf-out'), 1350);
+    setTimeout(() => ov.remove(), 1850);
+  }
+
   // Close nav when a link is clicked + flash the target section
   navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', (e) => {
+    a.addEventListener('click', () => {
       ham.classList.remove('open');
       navLinks.classList.remove('open');
+      const target = document.querySelector(a.getAttribute('href') || '');
+      if (target) sectionFlash(target);
+    });
+  });
 
-      const href = a.getAttribute('href');
-      if (!href || !href.startsWith('#')) return;
-      const target = document.querySelector(href);
-      if (!target) return;
-
-      // Neon border-trace: 4 lines draw clockwise from corners
-      // Remove any existing overlay
-      const old = target.querySelector('.sbf-overlay');
-      if (old) old.remove();
-      // Force a self-contained stacking context so overlay never bleeds over nav
-      if (getComputedStyle(target).position === 'static') target.style.position = 'relative';
-      target.style.isolation = 'isolate';
-      // Inject overlay — starts BELOW nav because scroll-margin-top already offsets
-      const ov = document.createElement('div');
-      ov.className = 'sbf-overlay';
-      ov.innerHTML = '<div class="sbf-top"></div><div class="sbf-right"></div><div class="sbf-bottom"></div><div class="sbf-left"></div>';
-      target.appendChild(ov);
-      // Fade out after trace completes, then clean up
-      setTimeout(() => ov.classList.add('sbf-out'), 1350);
-      setTimeout(() => ov.remove(), 1850);
+  // Hero CTA buttons → neon trace on target section (delay lets scroll settle first)
+  [['a[href="#contact"]', '#contact'], ['a[href="#projects"]', '#projects']].forEach(([sel, id]) => {
+    document.querySelectorAll(sel).forEach(btn => {
+      // skip nav links — already handled above
+      if (btn.closest('#nav-links')) return;
+      btn.addEventListener('click', () => {
+        const target = document.querySelector(id);
+        if (target) setTimeout(() => sectionFlash(target), 350);
+      });
     });
   });
 
