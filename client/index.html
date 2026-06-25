@@ -791,11 +791,12 @@
   /* The 4 neon lines */
   .sbf-top,.sbf-bottom,.sbf-left,.sbf-right{
     position:absolute;
-    background:rgba(255,255,255,.96);
+    background:#fff;
     box-shadow:
-      0 0 5px 1px rgba(255,255,255,.95),
-      0 0 14px 3px rgba(180,210,255,.8),
-      0 0 28px 6px rgba(99,102,241,.55);
+      0 0 4px 1px rgba(255,255,255,1),
+      0 0 12px 3px rgba(180,210,255,.9),
+      0 0 24px 5px rgba(99,102,241,.65),
+      0 0 48px 10px rgba(59,130,246,.25);
   }
   /* Top: left → right */
   .sbf-top{
@@ -1384,6 +1385,17 @@
     }, { threshold: 1 });
     noObs.observe(no);
   });
+
+  // ── NEON BORDER TRACE on scroll — fires once per section as it enters view ──
+  const neonObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      neonObs.unobserve(e.target);
+      // Small delay so section is clearly in view before trace starts
+      setTimeout(() => sectionFlash(e.target), 200);
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll('section[id]').forEach(s => neonObs.observe(s));
 
   // Hide broken project screenshot images gracefully
   document.querySelectorAll('.project-shot img').forEach(img => {
