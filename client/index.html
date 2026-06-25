@@ -754,10 +754,19 @@
 
   @media (prefers-reduced-motion: reduce){ *{transition:none !important; animation:none !important;} html{scroll-behavior:auto;} }
 
+  /* ── SCROLL OFFSET — keep sections below sticky nav ── */
+  section, footer#contact{
+    scroll-margin-top: 66px;  /* desktop nav height */
+  }
+  @media (max-width:768px){
+    section, footer#contact{ scroll-margin-top: 54px; } /* mobile nav height */
+  }
+
   /* NAV — neon border-trace on anchor click */
+  /* z-index kept low; isolation:isolate added via JS so it never bleeds over nav */
   .sbf-overlay{
     position:absolute; inset:0; pointer-events:none;
-    z-index:99; border-radius:inherit;
+    z-index:10; border-radius:inherit;
     clip-path:inset(0);          /* hard-clips glow to section bounds */
     opacity:1; transition:opacity .45s ease;
   }
@@ -1140,14 +1149,15 @@
       // Remove any existing overlay
       const old = target.querySelector('.sbf-overlay');
       if (old) old.remove();
-      // Ensure positioned
+      // Force a self-contained stacking context so overlay never bleeds over nav
       if (getComputedStyle(target).position === 'static') target.style.position = 'relative';
-      // Inject overlay
+      target.style.isolation = 'isolate';
+      // Inject overlay — starts BELOW nav because scroll-margin-top already offsets
       const ov = document.createElement('div');
       ov.className = 'sbf-overlay';
       ov.innerHTML = '<div class="sbf-top"></div><div class="sbf-right"></div><div class="sbf-bottom"></div><div class="sbf-left"></div>';
       target.appendChild(ov);
-      // Fade out after trace completes (~1.22s), then remove
+      // Fade out after trace completes, then clean up
       setTimeout(() => ov.classList.add('sbf-out'), 1350);
       setTimeout(() => ov.remove(), 1850);
     });
