@@ -271,6 +271,23 @@
   .social-btn.tw:hover{color:#1D9BF0; border-color:#1D9BF0;}
 
 
+  /* SCROLL PROGRESS BAR */
+  #scroll-bar{
+    position:fixed; top:0; left:0; z-index:200;
+    height:2px; width:0%;
+    background:linear-gradient(90deg, var(--accent), rgba(99,102,241,.8), rgba(59,130,246,.6));
+    transition:width .1s linear;
+    pointer-events:none;
+    box-shadow:0 0 8px rgba(255,106,61,.4);
+  }
+
+  /* ACTIVE NAV LINK */
+  nav a.navlink.active{color:var(--ink);}
+  nav a.navlink.active::after{width:100%;}
+
+  /* SECTION NUMBER SCRAMBLE — no flash of unstyled during animation */
+  .section-head .no{display:inline-block;}
+
   /* HAMBURGER */
   .hamburger{display:none; flex-direction:column; justify-content:center; gap:5px; cursor:pointer; background:none; border:none; padding:6px; border-radius:3px;}
   .hamburger span{display:block; width:22px; height:2px; background:var(--ink); border-radius:1px; transition:transform .25s ease, opacity .25s ease;}
@@ -814,6 +831,7 @@
   <div class="amb-orb amb-orb-4"></div>
 </div>
 
+<div id="scroll-bar" aria-hidden="true"></div>
 <nav>
   <div class="wrap">
     <div class="row">
@@ -1325,6 +1343,47 @@
     });
   },{threshold:.3});
   document.querySelectorAll('.section-head').forEach(h=>scanObs.observe(h));
+
+  // ── SCROLL PROGRESS BAR ──
+  const scrollBar = document.getElementById('scroll-bar');
+  if(scrollBar){
+    window.addEventListener('scroll', () => {
+      const doc = document.documentElement;
+      const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+      scrollBar.style.width = Math.min(pct, 100).toFixed(1) + '%';
+    }, { passive: true });
+  }
+
+  // ── ACTIVE NAV HIGHLIGHT (scroll spy) ──
+  const allSections = document.querySelectorAll('section[id], footer[id]');
+  const allNavLinks = document.querySelectorAll('nav a.navlink');
+  const spyObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        allNavLinks.forEach(l => l.classList.remove('active'));
+        const match = document.querySelector(`nav a.navlink[href="#${e.target.id}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { threshold: 0.35 });
+  allSections.forEach(s => spyObs.observe(s));
+
+  // ── SECTION NUMBER SCRAMBLE on enter ──
+  const digits = '0123456789';
+  document.querySelectorAll('.section-head .no').forEach(no => {
+    const final = no.textContent.trim();
+    const noObs = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      noObs.unobserve(no);
+      let frame = 0, total = 10;
+      const t = setInterval(() => {
+        frame++;
+        no.textContent = digits[Math.floor(Math.random()*10)] + digits[Math.floor(Math.random()*10)];
+        if (frame >= total) { clearInterval(t); no.textContent = final; }
+      }, 55);
+    }, { threshold: 1 });
+    noObs.observe(no);
+  });
 
   // Hide broken project screenshot images gracefully
   document.querySelectorAll('.project-shot img').forEach(img => {
