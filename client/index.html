@@ -1277,11 +1277,18 @@
   if(typeof lucide !== 'undefined') lucide.createIcons();
   else document.addEventListener('DOMContentLoaded', ()=>{ if(typeof lucide !== 'undefined') lucide.createIcons(); });
 
+  // ── ALWAYS OPEN AT TOP (prevent browser scroll-restoration on mobile) ──
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+  // Belt-and-suspenders: also force top after any paint
+  requestAnimationFrame(() => window.scrollTo(0, 0));
+
   // ── PAGE INTRO — lock scroll, then lift curtain ──
   (function(){
     const intro = document.getElementById('intro');
     if (!intro) return;
     // Lock body scroll while intro plays
+    window.scrollTo(0, 0);
     document.body.style.overflow = 'hidden';
     // accent line: 0.15s delay + 0.55s draw = 0.7s
     // name rises:  0.6s  delay + 0.65s rise = 1.25s
