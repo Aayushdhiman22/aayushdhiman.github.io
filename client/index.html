@@ -1268,30 +1268,91 @@
     }
   });
 
-  // Animated stat counters
-  const statNums = document.querySelectorAll('.stat .num[data-target]');
+  // Stat numbers — particle burst from all over page + character scramble settle
+  function animateStatEntry(el) {
+    const display = el.dataset.display || el.textContent;
+    const rect    = el.getBoundingClientRect();
+    const cx = rect.left + rect.width  / 2;
+    const cy = rect.top  + rect.height / 2;
+    const isMobile = window.innerWidth < 600;
+    const count    = isMobile ? 5 : 10;
+    const pool     = '0123456789%+–!#$@';
+
+    // Phase 1 — spawn particles from random viewport positions, fly them toward the number
+    for (let i = 0; i < count; i++) {
+      const sx  = Math.random() * window.innerWidth;
+      const sy  = Math.random() * window.innerHeight;
+      const dur = (0.5 + Math.random() * 0.4).toFixed(2);
+      const dly = (i * 0.045).toFixed(3);
+      const fs  = Math.round(12 + Math.random() * 20);
+      const op  = (0.12 + Math.random() * 0.22).toFixed(2);
+      const rot = Math.round(Math.random() * 360);
+
+      const p = document.createElement('span');
+      p.textContent = pool[Math.floor(Math.random() * pool.length)];
+      p.style.cssText = [
+        'position:fixed',
+        `left:${cx}px`,
+        `top:${cy}px`,
+        `transform:translate(${(sx-cx).toFixed(0)}px,${(sy-cy).toFixed(0)}px) scale(${(1+Math.random()).toFixed(1)}) rotate(${rot}deg)`,
+        `font-family:var(--display,sans-serif)`,
+        `font-weight:700`,
+        `font-size:${fs}px`,
+        `color:rgba(147,197,253,${op})`,
+        'pointer-events:none',
+        'z-index:9999',
+        `transition:transform ${dur}s ${dly}s cubic-bezier(.16,1,.3,1),opacity ${dur}s ${dly}s ease`,
+      ].join(';');
+      document.body.appendChild(p);
+
+      // Trigger fly-in (needs two rAF to let initial style paint first)
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        p.style.transform = 'translate(0,0) scale(0.1) rotate(0deg)';
+        p.style.opacity   = '0';
+      }));
+      setTimeout(() => p.remove(), (+dur + +dly) * 1000 + 150);
+    }
+
+    // Phase 2 — character scramble on the number itself
+    const digits = '0123456789';
+    const scrambleDur  = 680; // ms of random chaos
+    const resolveStep  = 85;  // ms to lock each character
+    let t0 = null;
+
+    function scrambleTick(ts) {
+      if (!t0) t0 = ts;
+      const elapsed = ts - t0;
+
+      if (elapsed < scrambleDur) {
+        // All numeric chars show random digits
+        el.textContent = [...display].map(c =>
+          /\d/.test(c) ? digits[Math.floor(Math.random() * 10)] : c
+        ).join('');
+        requestAnimationFrame(scrambleTick);
+      } else {
+        // Lock chars left-to-right
+        const locked = Math.floor((elapsed - scrambleDur) / resolveStep);
+        if (locked < display.length) {
+          el.textContent = [...display].map((c, i) =>
+            (i <= locked || !/\d/.test(c)) ? c : digits[Math.floor(Math.random() * 10)]
+          ).join('');
+          requestAnimationFrame(scrambleTick);
+        } else {
+          el.textContent = display; // final lock
+        }
+      }
+    }
+    requestAnimationFrame(scrambleTick);
+  }
+
+  const statNums = document.querySelectorAll('.stat .num[data-display]');
   const counterObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      const el = e.target;
-      const target = parseInt(el.dataset.target, 10);
-      const display = el.dataset.display;
-      const duration = 1300;
-      let startTs = null;
-
-      function tick(ts) {
-        if (!startTs) startTs = ts;
-        const elapsed = ts - startTs;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(eased * target);
-        el.textContent = progress >= 1 ? display : current;
-        if (progress < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      counterObs.unobserve(el);
+      animateStatEntry(e.target);
+      counterObs.unobserve(e.target);
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.5 });
   statNums.forEach(n => counterObs.observe(n));
 </script>
 
