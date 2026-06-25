@@ -119,7 +119,8 @@
   .stat .cap{font-size:12.5px; color:var(--slate); margin-top:8px; line-height:1.5;}
 
   /* SECTION GENERIC */
-  section{padding:96px 0;}
+  section{padding:96px 0; position:relative;}  /* position:relative needed for neon overlay */
+  footer{position:relative;}
   .section-head{margin-bottom:48px; display:flex; align-items:baseline; gap:18px;}
   .section-head .no{font-family:var(--mono); font-size:13px; color:var(--slate-dim);}
   .section-head h2{font-size:26px; font-weight:600;}
@@ -1387,15 +1388,23 @@
   });
 
   // ── NEON BORDER TRACE on scroll — fires once per section as it enters view ──
+  // threshold:0 + rootMargin triggers the moment any part of the section
+  // crosses 120px above the bottom edge — works for sections of any height
   const neonObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       neonObs.unobserve(e.target);
-      // Small delay so section is clearly in view before trace starts
-      setTimeout(() => sectionFlash(e.target), 200);
+      // Ensure section is positioned so the absolute overlay works
+      const el = e.target;
+      if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+      setTimeout(() => sectionFlash(el), 150);
     });
-  }, { threshold: 0.25 });
-  document.querySelectorAll('section[id]').forEach(s => neonObs.observe(s));
+  }, {
+    threshold: 0,
+    rootMargin: '0px 0px -120px 0px'   // trigger when section top is 120px above viewport bottom
+  });
+  // Include every named section AND the contact footer
+  document.querySelectorAll('section[id], footer[id]').forEach(s => neonObs.observe(s));
 
   // Hide broken project screenshot images gracefully
   document.querySelectorAll('.project-shot img').forEach(img => {
