@@ -66,9 +66,14 @@
   [data-theme="light"] .chips span:hover{background:rgba(255,255,255,.95); border-color:var(--accent);}
   [data-theme="light"] .foot-grid{background:rgba(255,255,255,.6); border-color:rgba(0,0,0,.08);}
   [data-theme="light"] #scroll-bar{background:linear-gradient(90deg,var(--accent),rgba(99,102,241,.8));}
+  [data-theme="light"] .nav-link{color:var(--slate);}
+  [data-theme="light"] .nav-link:hover{color:var(--ink);}
+  [data-theme="light"] .nav-cta{background:var(--ink); color:var(--bg);}
+  [data-theme="light"] .nav-cta:hover{background:var(--accent);}
   [data-theme="light"] .section-shimmer::after{background:linear-gradient(105deg,transparent 0%,rgba(0,0,0,.02) 40%,rgba(0,0,0,.05) 50%,rgba(0,0,0,.02) 60%,transparent 100%);}
   [data-theme="light"] .section-head .no{background:linear-gradient(135deg,var(--accent),rgba(99,102,241,.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
   [data-theme="light"] .brand{background:linear-gradient(90deg,var(--ink),var(--slate));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  [data-theme="light"] #hero-canvas{opacity:.35;}
 
   /* Theme toggle button */
   .theme-toggle{
@@ -80,6 +85,14 @@
   }
   .theme-toggle:hover{border-color:var(--slate); color:var(--ink);}
   .theme-toggle svg{width:13px; height:13px; flex-shrink:0;}
+
+
+  /* Smooth theme switching */
+  body, nav, section, footer, .stats,
+  .exp-item, .proj-row, .edu-card, .stat, .chips span,
+  .skill-cols > div, .foot-grid {
+    transition: background .35s ease, border-color .35s ease, color .35s ease, box-shadow .35s ease;
+  }
 
   /* ── SHIMMER ANIMATION (replaces curvy neon) ─────────────────── */
   .section-shimmer{
