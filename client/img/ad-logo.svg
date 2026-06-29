@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+<defs>
+  <!-- Background gradient: dark navy -->
+  <radialGradient id="gBG" cx="45%" cy="60%" r="65%">
+    <stop offset="0%" stop-color="#071428"/>
+    <stop offset="60%" stop-color="#030B18"/>
+    <stop offset="100%" stop-color="#010508"/>
+  </radialGradient>
+  <!-- A: steel-blue metallic -->
+  <linearGradient id="gA" x1="10%" y1="0%" x2="90%" y2="100%">
+    <stop offset="0%" stop-color="#B8CCDD"/>
+    <stop offset="20%" stop-color="#7898B8"/>
+    <stop offset="50%" stop-color="#4A6680"/>
+    <stop offset="80%" stop-color="#2A3D52"/>
+    <stop offset="100%" stop-color="#182435"/>
+  </linearGradient>
+  <!-- A sheen -->
+  <linearGradient id="gAsheen" x1="0%" y1="0%" x2="70%" y2="100%">
+    <stop offset="0%" stop-color="#DDEEFF" stop-opacity="0.55"/>
+    <stop offset="45%" stop-color="#88AACC" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <!-- D: chrome silver -->
+  <linearGradient id="gD" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#E8EEFF"/>
+    <stop offset="18%" stop-color="#C0CCD8"/>
+    <stop offset="45%" stop-color="#8898A8"/>
+    <stop offset="75%" stop-color="#556070"/>
+    <stop offset="100%" stop-color="#283040"/>
+  </linearGradient>
+  <!-- D sheen -->
+  <linearGradient id="gDsheen" x1="0%" y1="0%" x2="55%" y2="100%">
+    <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.5"/>
+    <stop offset="50%" stop-color="#AACCFF" stop-opacity="0.1"/>
+    <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <!-- Blue flame outer -->
+  <linearGradient id="gF1" x1="0%" y1="100%" x2="5%" y2="0%">
+    <stop offset="0%" stop-color="#001888"/>
+    <stop offset="30%" stop-color="#0044CC"/>
+    <stop offset="65%" stop-color="#0088FF"/>
+    <stop offset="90%" stop-color="#44CCFF"/>
+    <stop offset="100%" stop-color="#88EEFF" stop-opacity="0"/>
+  </linearGradient>
+  <!-- Blue flame mid -->
+  <linearGradient id="gF2" x1="0%" y1="100%" x2="0%" y2="0%">
+    <stop offset="0%" stop-color="#0022AA"/>
+    <stop offset="35%" stop-color="#0066DD"/>
+    <stop offset="70%" stop-color="#22AAFF"/>
+    <stop offset="100%" stop-color="#88DDFF" stop-opacity="0"/>
+  </linearGradient>
+  <!-- Blue flame inner bright -->
+  <linearGradient id="gF3" x1="0%" y1="100%" x2="0%" y2="0%">
+    <stop offset="0%" stop-color="#0055DD"/>
+    <stop offset="45%" stop-color="#33BBFF"/>
+    <stop offset="85%" stop-color="#AADDFF"/>
+    <stop offset="100%" stop-color="#EEFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <!-- Blue flame core -->
+  <linearGradient id="gFcore" x1="0%" y1="100%" x2="0%" y2="0%">
+    <stop offset="0%" stop-color="#0088FF"/>
+    <stop offset="50%" stop-color="#66DDFF"/>
+    <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <!-- Ambient blue glow behind A -->
+  <radialGradient id="gGlowA" cx="32%" cy="65%" r="50%">
+    <stop offset="0%" stop-color="#0055FF" stop-opacity="0.22"/>
+    <stop offset="100%" stop-color="#0055FF" stop-opacity="0"/>
+  </radialGradient>
+  <!-- Ambient blue glow behind D -->
+  <radialGradient id="gGlowD" cx="75%" cy="60%" r="45%">
+    <stop offset="0%" stop-color="#0044CC" stop-opacity="0.18"/>
+    <stop offset="100%" stop-color="#0044CC" stop-opacity="0"/>
+  </radialGradient>
+  <!-- Floor reflection glow -->
+  <radialGradient id="gFloor" cx="50%" cy="100%" r="45%">
+    <stop offset="0%" stop-color="#0066FF" stop-opacity="0.28"/>
+    <stop offset="100%" stop-color="#0044FF" stop-opacity="0"/>
+  </radialGradient>
+  <!-- Blue neon edge on letters -->
+  <filter id="fBlueGlow" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
+    <feColorMatrix in="b" type="matrix"
+      values="0 0 0 0 0.05
+              0 0 0 0 0.3
+              0 0 0 0 1
+              0 0 0 1 0" result="blue"/>
+    <feMerge><feMergeNode in="blue"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="fGlow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="fGlowS" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="fBig" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="fLetterGlow" x="-15%" y="-15%" width="130%" height="130%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <clipPath id="cpA">
+    <text x="28" y="305" font-family="Arial Black,Impact,sans-serif" font-size="195" font-weight="900">A</text>
+  </clipPath>
+  <clipPath id="cpD">
+    <text x="188" y="305" font-family="Arial Black,Impact,sans-serif" font-size="195" font-weight="900">D</text>
+  </clipPath>
+</defs>
+
+<!-- Background -->
+<rect width="400" height="400" fill="url(#gBG)"/>
+
+<!-- Ambient glows -->
+<rect width="400" height="400" fill="url(#gGlowA)"/>
+<rect width="400" height="400" fill="url(#gGlowD)"/>
+<rect width="400" height="400" fill="url(#gFloor)"/>
+
+<!-- Blue ambient pool at base -->
+<ellipse cx="200" cy="355" rx="80" ry="20" fill="#0055FF" opacity="0.18" filter="url(#fBig)"/>
+<ellipse cx="200" cy="358" rx="44" ry="10" fill="#0088FF" opacity="0.22" filter="url(#fBig)"/>
+
+<!-- ═══ LETTER A ═══ -->
+<!-- depth shadow -->
+<text x="32" y="309" font-family="Arial Black,Impact,sans-serif" font-size="195" font-weight="900" fill="#001030" opacity="0.85" transform="skewX(-3) translate(5,5)">A</text>
+<!-- main A -->
+<text x="28" y="305" font-family="Arial Black,Impact,sans-serif" font-size="195" font-weight="900" fill="url(#gA)" filter="url(#fLetterGlow)" transform="skewX(-3)">A</text>
+<!-- sheen -->
+<rect x="22" y="115" width="130" height="195" fill="url(#gAsheen)" clip-path="url(#cpA)" opacity="0.65" transform="skewX(-3)"/>
+<!-- blue neon edge -->
+<text x="28" y="305" font-family="Arial Black,Impact,sans-serif" font-size="195" font-weight="900" fill="none" stroke="#33AAFF" stroke-width="1.5" stroke-opacity="0.7" transform="skewX(-3)">A</text>
+<!-- outer blue glow -->
+<text x="28" y="305" font-family="Arial Black,Impact,sans-serif" font-size="195" font-weight="900" fill="#0066FF" opacity="0.18" filter="url(#fBig)" transform="skewX(-3)">A</text>
+
+<!-- ═══ LETTER D ═══ -->
+<!-- depth shadow -->
+<text x="192" y="309" font-family="Arial Black,Impact,sans-serif" font-size="195" font-weight="900" fill="#000818" opacity="0.85" transform="translate(5,5)">D</text>
+<!-- main D -->
+<text x="188" y="305" font-family="Arial Black,Impact,sans-serif" font-size="195" font-weight="900" fill="url(#gD)" filter="url(#fLetterGlow)">D</text>
+<!-- sheen -->
+<rect x="188" y="115" width="140" height="145" fill="url(#gDsheen)" clip-path="url(#cpD)" opacity="0.7"/>
+<!-- blue neon edge -->
+<text x="188" y="305" font-family="Arial Black,Impact,sans-serif" font-size="195" font-weight="900" fill="none" stroke="#22AAFF" stroke-width="1.2" stroke-opacity="0.55">D</text>
+<!-- outer blue glow -->
+<text x="188" y="305" font-family="Arial Black,Impact,sans-serif" font-size="195" font-weight="900" fill="#0055CC" opacity="0.14" filter="url(#fBig)">D</text>
+
+<!-- ═══ BLUE ENERGY FLAMES ═══ -->
+<!-- Back wide flames -->
+<path d="M170,350 C162,308 148,268 154,222 C158,182 170,152 162,108 C156,68 164,36 186,6 C190,22 193,46 190,70 C186,104 176,132 180,168 C183,198 192,222 194,255 C196,285 190,318 188,350 Z" fill="url(#gF1)" opacity="0.7"/>
+<path d="M208,350 C218,308 230,268 224,222 C220,182 208,152 216,108 C222,68 214,36 206,6 C202,22 200,46 203,70 C207,104 217,132 213,168 C210,198 201,222 199,255 C197,285 203,318 205,350 Z" fill="url(#gF1)" opacity="0.62"/>
+
+<!-- Mid flames -->
+<path d="M178,350 C170,312 160,278 164,240 C168,204 179,178 174,140 C169,106 177,70 196,30 C198,16 200,4 201,0 C202,4 204,16 206,30 C220,70 224,106 220,140 C215,178 224,204 228,240 C232,278 222,312 215,350 Z" fill="url(#gF2)" opacity="0.88"/>
+
+<!-- Inner bright flame -->
+<path d="M185,350 C180,318 173,288 177,256 C180,228 188,206 184,174 C181,144 188,110 200,68 C202,52 203,32 204,16 C205,32 206,52 208,68 C218,110 222,144 218,176 C214,206 220,228 222,258 C225,288 220,318 215,350 Z" fill="url(#gF3)" opacity="0.82"/>
+
+<!-- Core flame (bright cyan) -->
+<path d="M192,350 C189,328 184,305 186,278 C188,252 194,232 192,206 C190,180 195,150 203,115 C205,95 206,70 207,50 C208,70 209,95 211,118 C216,152 218,182 216,208 C214,232 218,255 220,280 C222,306 218,330 215,350 Z" fill="url(#gFcore)" opacity="0.72"/>
+
+<!-- Flame tip bright glow -->
+<ellipse cx="206" cy="52" rx="8" ry="24" fill="#44CCFF" opacity="0.5" filter="url(#fGlow)"/>
+<ellipse cx="206" cy="42" rx="4" ry="14" fill="#AAEEFF" opacity="0.35" filter="url(#fGlowS)"/>
+<ellipse cx="206" cy="35" rx="2.5" ry="8" fill="#FFFFFF" opacity="0.25"/>
+
+<!-- ═══ BLUE SPARK PARTICLES ═══ -->
+<circle cx="162" cy="195" r="2.2" fill="#22AAFF" opacity="0.85" filter="url(#fGlowS)"/>
+<circle cx="156" cy="162" r="1.5" fill="#44CCFF" opacity="0.75"/>
+<circle cx="170" cy="128" r="1.8" fill="#0088FF" opacity="0.7"/>
+<circle cx="163" cy="242" r="2" fill="#0066DD" opacity="0.65"/>
+<circle cx="148" cy="218" r="1.4" fill="#33BBFF" opacity="0.55"/>
+<circle cx="243" cy="188" r="2.2" fill="#22AAFF" opacity="0.8" filter="url(#fGlowS)"/>
+<circle cx="250" cy="150" r="1.5" fill="#55CCFF" opacity="0.7"/>
+<circle cx="240" cy="125" r="1.8" fill="#0088FF" opacity="0.65"/>
+<circle cx="255" cy="225" r="1.6" fill="#0077EE" opacity="0.55"/>
+<circle cx="177" cy="92" r="1.5" fill="#44DDFF" opacity="0.7" filter="url(#fGlowS)"/>
+<circle cx="226" cy="98" r="1.3" fill="#33AAFF" opacity="0.65"/>
+<circle cx="195" cy="75" r="2" fill="#66DDFF" opacity="0.6" filter="url(#fGlowS)"/>
+<circle cx="216" cy="65" r="1.5" fill="#44CCFF" opacity="0.5"/>
+<circle cx="202" cy="36" r="2.5" fill="#AAEEFF" opacity="0.4" filter="url(#fGlowS)"/>
+<!-- Tiny far sparks -->
+<circle cx="140" cy="285" r="1.2" fill="#0066FF" opacity="0.4"/>
+<circle cx="262" cy="270" r="1.2" fill="#0077FF" opacity="0.4"/>
+<circle cx="184" cy="45" r="1.5" fill="#88EEFF" opacity="0.45"/>
+<circle cx="222" cy="48" r="1.2" fill="#66DDFF" opacity="0.4"/>
+
+<!-- Floor reflection line -->
+<ellipse cx="200" cy="370" rx="65" ry="5" fill="#0055FF" opacity="0.12" filter="url(#fBig)"/>
+</svg>
