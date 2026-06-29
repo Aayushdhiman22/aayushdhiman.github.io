@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +31,81 @@
     --body:'Inter', sans-serif;
     --mono:'JetBrains Mono', monospace;
   }
+
+  /* ── LIGHT / DAY THEME ──────────────────────────────────────── */
+  [data-theme="light"]{
+    --bg:#F5F4F1;
+    --panel:#ECEAE5;
+    --ink:#1C1B18;
+    --ink-soft:#3A3835;
+    --slate:#6B6865;
+    --slate-dim:#9A9895;
+    --line:#D5D3CE;
+    --line-soft:#E2E0DC;
+    --accent:#E85D2F;
+    --display:'Archivo', sans-serif;
+    --body:'Inter', sans-serif;
+    --mono:'JetBrains Mono', monospace;
+  }
+
+  /* Light mode overrides */
+  [data-theme="light"] body{background:var(--bg);}
+  [data-theme="light"] nav{background:rgba(245,244,241,.88);}
+  [data-theme="light"] .stats{background:var(--panel);}
+  [data-theme="light"] #experience,[data-theme="light"] #skills{background:var(--panel) !important;}
+  [data-theme="light"] footer{background:var(--bg);}
+  [data-theme="light"] .hero h1{background:linear-gradient(130deg,#1C1B18 0%,#3A3835 50%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  [data-theme="light"] .stat .num{background:linear-gradient(135deg,#1C1B18 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  [data-theme="light"] .exp-item,[data-theme="light"] .proj-row,[data-theme="light"] .edu-card{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08);}
+  [data-theme="light"] .skill-cols > div{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08);}
+  [data-theme="light"] .exp-item:hover,[data-theme="light"] .proj-row:hover,[data-theme="light"] .edu-card:hover{background:rgba(255,255,255,.95); box-shadow:0 18px 56px rgba(0,0,0,.12);}
+  [data-theme="light"] .stat{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08) !important;}
+  [data-theme="light"] .stat:hover{background:rgba(255,255,255,.95);}
+  [data-theme="light"] .hero::before{background:radial-gradient(ellipse 65% 55% at 8% 45%,rgba(232,93,47,.1) 0%,transparent 60%),radial-gradient(ellipse 55% 65% at 78% 18%,rgba(99,102,241,.07) 0%,transparent 55%);}
+  [data-theme="light"] .chips span{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.1);}
+  [data-theme="light"] .chips span:hover{background:rgba(255,255,255,.95); border-color:var(--accent);}
+  [data-theme="light"] .foot-grid{background:rgba(255,255,255,.6); border-color:rgba(0,0,0,.08);}
+  [data-theme="light"] #scroll-bar{background:linear-gradient(90deg,var(--accent),rgba(99,102,241,.8));}
+  [data-theme="light"] .section-shimmer::after{background:linear-gradient(105deg,transparent 0%,rgba(0,0,0,.02) 40%,rgba(0,0,0,.05) 50%,rgba(0,0,0,.02) 60%,transparent 100%);}
+  [data-theme="light"] .section-head .no{background:linear-gradient(135deg,var(--accent),rgba(99,102,241,.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  [data-theme="light"] .brand{background:linear-gradient(90deg,var(--ink),var(--slate));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  /* Theme toggle button */
+  .theme-toggle{
+    background:none; border:1px solid var(--line); border-radius:20px;
+    color:var(--slate); padding:6px 12px; font-size:12px; font-family:var(--mono);
+    cursor:pointer; display:flex; align-items:center; gap:6px;
+    transition:border-color .2s ease, color .2s ease, background .2s ease;
+    letter-spacing:.04em;
+  }
+  .theme-toggle:hover{border-color:var(--slate); color:var(--ink);}
+  .theme-toggle svg{width:13px; height:13px; flex-shrink:0;}
+
+  /* ── SHIMMER ANIMATION (replaces curvy neon) ─────────────────── */
+  .section-shimmer{
+    position:absolute; inset:0; z-index:10; pointer-events:none;
+    overflow:hidden; border-radius:inherit;
+  }
+  .section-shimmer::after{
+    content:''; position:absolute; top:-50%; left:-100%;
+    width:55%; height:200%;
+    background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.03) 35%,rgba(255,255,255,.07) 50%,rgba(255,255,255,.03) 65%,transparent 100%);
+    transform:skewX(-12deg);
+    transition:left .9s cubic-bezier(.16,1,.3,1);
+  }
+  .section-shimmer.active::after{left:160%;}
+
+  /* Section pulse ring (on click) */
+  @keyframes pulse-ring{
+    0%{transform:scale(1); opacity:.5;}
+    100%{transform:scale(1.04); opacity:0;}
+  }
+  .section-pulse{
+    position:absolute; inset:0; border-radius:inherit;
+    border:1px solid rgba(255,106,61,.5); pointer-events:none; z-index:10;
+    animation:pulse-ring .7s cubic-bezier(.16,1,.3,1) forwards;
+  }
+
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.65; font-size:16px;}
@@ -246,9 +321,7 @@
   #intro.intro-out{animation:intro-curtain .8s cubic-bezier(.76,0,.24,1) forwards;}
   @keyframes intro-curtain{from{transform:translateY(0);}to{transform:translateY(-100%);}}
 
-  /* Curvy neon SVG trace */
-  .sbf-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;}
-  .sbf-path{fill:none;stroke-width:2;stroke-linecap:round;filter:drop-shadow(0 0 3px rgba(255,255,255,.9)) drop-shadow(0 0 8px rgba(147,210,255,.85)) drop-shadow(0 0 18px rgba(99,102,241,.7)) drop-shadow(0 0 36px rgba(59,130,246,.4));}
+
 
   /* Hero canvas */
   .hero{position:relative; overflow:hidden;}
@@ -638,6 +711,10 @@
         <li><a class="navlink" href="#education">Education</a></li>
         <li><a class="navlink" href="#contact">Contact</a></li>
       </ul>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="theme-icon"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span id="theme-label">Light</span>
+      </button>
       <a class="nav-cta" href="#contact">Contact</a>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -914,7 +991,7 @@
   document.querySelectorAll('nav a.navlink[href^="#"]').forEach(a => {
     a.addEventListener('click', () => {
       const t = document.getElementById(a.getAttribute('href').slice(1));
-      if (t) setTimeout(() => sectionFlash(t), 550);
+      if (t) setTimeout(() => sectionFlash(t, true), 550);
     });
   });
 
@@ -958,43 +1035,26 @@
   }, { threshold: 0.4 });
   document.querySelectorAll('.stat .num[data-target]').forEach(n => counterObs.observe(n));
 
-  // ── Curvy neon border flash ─────────────────────────────────────────────────
-  function sectionFlash(el) {
-    const old = el.querySelector('.sbf-svg'); if (old) old.remove();
+  // ── Section shimmer (scroll reveal animation) ─────────────────────────────
+  function sectionFlash(el, isClick = false) {
+    // Remove old
+    el.querySelectorAll('.section-shimmer,.section-pulse').forEach(e => e.remove());
     el.style.isolation = 'isolate';
-    const W = el.offsetWidth, H = el.offsetHeight, ns = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(ns, 'svg');
-    svg.setAttribute('class','sbf-svg');
-    svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
-    svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;opacity:1;transition:opacity .8s ease;';
-    const wA = Math.min(42, H * 0.06), p = 3;
-    const d = [
-      `M ${p},${p+wA}`,
-      `C ${W*.12},${p-wA*1.2} ${W*.38},${p+wA*1.8} ${W*.5},${p}`,
-      `C ${W*.62},${p-wA*1.4} ${W*.88},${p+wA} ${W-p},${p+wA}`,
-      `L ${W-p},${H-p-wA}`,
-      `C ${W*.88},${H+wA*.9} ${W*.62},${H-p-wA*1.8} ${W*.5},${H-p}`,
-      `C ${W*.38},${H+wA*1.4} ${W*.12},${H-p-wA} ${p},${H-p-wA}`,
-      `Z`
-    ].join(' ');
-    const uid = 'ng'+Date.now();
-    const defs = document.createElementNS(ns,'defs');
-    defs.innerHTML = `<linearGradient id="${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-      <stop offset="25%" stop-color="#fff"/>
-      <stop offset="50%" stop-color="#7DD3FC"/>
-      <stop offset="75%" stop-color="#818CF8"/>
-      <stop offset="100%" stop-color="rgba(99,102,241,0)"/>
-    </linearGradient>`;
-    const path = document.createElementNS(ns,'path');
-    path.setAttribute('d',d); path.setAttribute('class','sbf-path');
-    path.setAttribute('stroke',`url(#${uid})`);
-    svg.appendChild(defs); svg.appendChild(path); el.appendChild(svg);
-    const len = path.getTotalLength();
-    path.style.cssText += `stroke-dasharray:${len};stroke-dashoffset:${len};transition:stroke-dashoffset 1.8s cubic-bezier(.16,1,.3,1);`;
-    requestAnimationFrame(() => requestAnimationFrame(() => { path.style.strokeDashoffset = '0'; }));
-    setTimeout(() => { svg.style.opacity = '0'; }, 2000);
-    setTimeout(() => { try { svg.remove(); } catch(e){} }, 2900);
+
+    // Shimmer sweep
+    const shimmer = document.createElement('div');
+    shimmer.className = 'section-shimmer';
+    el.appendChild(shimmer);
+    requestAnimationFrame(() => requestAnimationFrame(() => shimmer.classList.add('active')));
+    setTimeout(() => { try { shimmer.remove(); } catch(e){} }, 1100);
+
+    // On click: also add a pulse ring
+    if (isClick) {
+      const pulse = document.createElement('div');
+      pulse.className = 'section-pulse';
+      el.appendChild(pulse);
+      setTimeout(() => { try { pulse.remove(); } catch(e){} }, 750);
+    }
   }
 
   // ── Neon on scroll ──────────────────────────────────────────────────────────
@@ -1102,6 +1162,36 @@
     resize(); init(); draw();
     window.addEventListener('resize', ()=>{ resize(); init(); }, {passive:true});
   })();
+
+  // ── Day / Night theme toggle ────────────────────────────────────────────────
+  const root = document.documentElement;
+  const toggleBtn = document.getElementById('theme-toggle');
+  const themeLabel = document.getElementById('theme-label');
+  const themeIcon = document.getElementById('theme-icon');
+
+  const moonPath = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  const sunPaths = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (theme === 'light') {
+      themeLabel.textContent = 'Dark';
+      themeIcon.innerHTML = moonPath;
+    } else {
+      themeLabel.textContent = 'Light';
+      themeIcon.innerHTML = sunPaths;
+    }
+  }
+
+  // Load saved preference
+  const saved = localStorage.getItem('theme') || 'dark';
+  applyTheme(saved);
+
+  toggleBtn.addEventListener('click', () => {
+    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
 </script>
 
 </body>
