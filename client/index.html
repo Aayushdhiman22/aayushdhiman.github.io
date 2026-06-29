@@ -12,7 +12,7 @@
 <meta property="og:image" content="https://aayushdhiman.vercel.app/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://aayushdhiman.vercel.app/og.png">
-<link rel="icon" href="img/ad-logo.svg" type="image/svg+xml">>
+<link rel="icon" href="img/ad-logo.png" type="image/png"><link rel="icon" href="img/ad-logo.svg" type="image/svg+xml">>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -246,16 +246,9 @@
   #intro.intro-out{animation:intro-curtain .8s cubic-bezier(.76,0,.24,1) forwards;}
   @keyframes intro-curtain{from{transform:translateY(0);}to{transform:translateY(-100%);}}
 
-  /* Neon section border trace */
-  .sbf-overlay{position:absolute;inset:0;pointer-events:none;z-index:10;clip-path:inset(0);opacity:1;transition:opacity .45s ease;}
-  .sbf-overlay.sbf-out{opacity:0;}
-  .sbf-top,.sbf-bottom,.sbf-left,.sbf-right{position:absolute;background:#fff;box-shadow:0 0 4px 1px rgba(255,255,255,1),0 0 12px 3px rgba(180,210,255,.9),0 0 24px 5px rgba(99,102,241,.65),0 0 48px 10px rgba(59,130,246,.25);}
-  .sbf-top{top:0;left:0;height:2px;width:0;animation:sbf-w .32s cubic-bezier(.16,1,.3,1) 0s forwards;}
-  .sbf-right{top:0;right:0;width:2px;height:0;animation:sbf-h .32s cubic-bezier(.16,1,.3,1) .30s forwards;}
-  .sbf-bottom{bottom:0;right:0;height:2px;width:0;animation:sbf-w .32s cubic-bezier(.16,1,.3,1) .60s forwards;}
-  .sbf-left{bottom:0;left:0;width:2px;height:0;animation:sbf-h .32s cubic-bezier(.16,1,.3,1) .90s forwards;}
-  @keyframes sbf-w{from{width:0}to{width:100%}}
-  @keyframes sbf-h{from{height:0}to{height:100%}}
+  /* Curvy neon SVG trace */
+  .sbf-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;}
+  .sbf-path{fill:none;stroke-width:2;stroke-linecap:round;filter:drop-shadow(0 0 3px rgba(255,255,255,.9)) drop-shadow(0 0 8px rgba(147,210,255,.85)) drop-shadow(0 0 18px rgba(99,102,241,.7)) drop-shadow(0 0 36px rgba(59,130,246,.4));}
 
   /* Hero canvas */
   .hero{position:relative; overflow:hidden;}
@@ -355,12 +348,7 @@
     -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
   }
 
-  /* Smoother neon trace */
-  .sbf-overlay{transition:opacity .6s cubic-bezier(.16,1,.3,1);}
-  .sbf-top{animation:sbf-w .4s cubic-bezier(.16,1,.3,1) 0s forwards;}
-  .sbf-right{animation:sbf-h .4s cubic-bezier(.16,1,.3,1) .38s forwards;}
-  .sbf-bottom{animation:sbf-w .4s cubic-bezier(.16,1,.3,1) .75s forwards;}
-  .sbf-left{animation:sbf-h .4s cubic-bezier(.16,1,.3,1) 1.1s forwards;}
+
 
   /* Gradient social btn hover */
   .social-btn:hover{
@@ -376,6 +364,92 @@
   /* Intro smoother */
   #intro.intro-out{animation:intro-curtain 1s cubic-bezier(.76,0,.24,1) forwards;}
 
+
+  /* ── GRADIENT THEME ─────────────────────────────────────── */
+  /* Hero radial gradient enhanced */
+  .hero::before{content:'';position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(ellipse 65% 55% at 8% 45%, rgba(255,106,61,.16) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 65% at 78% 18%, rgba(99,102,241,.13) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 45% at 55% 88%, rgba(59,130,246,.1) 0%, transparent 50%),
+      radial-gradient(ellipse 30% 30% at 90% 70%, rgba(139,92,246,.07) 0%, transparent 45%);
+    pointer-events:none;}
+
+  /* Gradient h1 */
+  .hero h1{background:linear-gradient(130deg,#F4F3F0 0%,#E0DDD8 35%,#FF9A6C 75%,var(--accent) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  /* Gradient eyebrow */
+  .hero .eyebrow{background:linear-gradient(90deg,var(--slate-dim),rgba(99,102,241,.7));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  /* Gradient stat numbers */
+  .stat .num{background:linear-gradient(135deg,#F4F3F0 0%,var(--accent) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    font-family:var(--display);font-size:30px;font-weight:600;}
+
+  /* Gradient section numbers */
+  .section-head .no{background:linear-gradient(135deg,var(--accent),rgba(99,102,241,.9));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  /* Gradient intro name */
+  .intro-name{background:linear-gradient(130deg,#F4F3F0 0%,#FF9A6C 60%,var(--accent) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  /* Gradient on experience/skills backgrounds */
+  #experience{background:linear-gradient(170deg,#141518 0%,#111215 60%,#0f1012 100%) !important;}
+  #skills{background:linear-gradient(170deg,#141518 0%,#0f1012 100%) !important;}
+
+  /* Gradient footer */
+  footer{background:linear-gradient(180deg,var(--bg) 0%,#07080A 100%);}
+
+  /* Gradient proj hover accent bar */
+  .proj-row{position:relative;transition:padding-left .3s cubic-bezier(.16,1,.3,1);}
+  .proj-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,var(--accent),rgba(99,102,241,.7),rgba(59,130,246,.4));
+    opacity:0;transition:opacity .3s ease;}
+  .proj-row:hover::before{opacity:1;}
+
+  /* Gradient chip hover */
+  .chips span:hover{border-color:rgba(255,106,61,.5);
+    background:linear-gradient(135deg,rgba(255,106,61,.08),rgba(99,102,241,.06));color:var(--ink);}
+
+  /* Gradient btn-primary */
+  .btn-primary{background:linear-gradient(135deg,#F4F3F0 0%,#D0CCC8 100%);}
+
+  /* Gradient social hover */
+  .social-btn:hover{background:linear-gradient(135deg,rgba(255,106,61,.1),rgba(99,102,241,.08));
+    color:var(--ink);border-color:var(--accent);}
+
+  /* Gradient award mark */
+  .award-line .mark{background:linear-gradient(135deg,var(--accent),#FF9A6C);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  /* Gradient nav brand */
+  .brand{background:linear-gradient(90deg,var(--ink),#C9C9C4);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .brand-logo{-webkit-text-fill-color:initial;}
+
+  /* Gradient exp-title */
+  .exp-title{background:linear-gradient(135deg,var(--ink) 0%,#D8D5D0 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  /* Gradient edu deg */
+  .edu-card .deg{background:linear-gradient(135deg,var(--ink),#C0BDB8);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  /* Gradient proj-impact arrow */
+  .proj-impact::before{background:linear-gradient(90deg,var(--accent),rgba(99,102,241,.8));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  /* Smoother reveals */
+  .reveal{opacity:0;transform:translateY(22px);
+    transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* Intro smoother */
+  #intro.intro-out{animation:intro-curtain 1s cubic-bezier(.76,0,.24,1) forwards;}
+
   @media (prefers-reduced-motion: reduce){ *{transition:none !important;} html{scroll-behavior:auto;} }
 </style>
 </head>
@@ -384,7 +458,7 @@
 <div id="scroll-bar"></div>
 
 <div id="intro" aria-hidden="true">
-  <img src="img/ad-logo.svg" class="intro-logo" alt="AD">
+  <img src="img/ad-logo.png" class="intro-logo" alt="AD" onerror="this.src='img/ad-logo.svg'">
   <div class="intro-accent"></div>
   <div class="intro-name">Aayush Dhiman</div>
   <div class="intro-role">Marketplace Operations</div>
@@ -393,7 +467,7 @@
 <nav>
   <div class="wrap">
     <div class="row">
-      <div class="brand"><img src="img/ad-logo.svg" class="brand-logo" alt="AD"> Aayush Dhiman</div>
+      <div class="brand"><img src="img/ad-logo.png" class="brand-logo" alt="AD" onerror="this.src='img/ad-logo.svg'"> Aayush Dhiman</div>
       <ul id="nav-links">
         <li><a class="navlink" href="#about">About</a></li>
         <li><a class="navlink" href="#experience">Experience</a></li>
@@ -719,18 +793,65 @@
   }, { threshold: 0.4 });
   statNums.forEach(n => counterObs.observe(n));
 
-  // ── Neon section border trace ───────────────────────────────────────────────
-  function sectionFlash(sectionEl) {
-    const old = sectionEl.querySelector('.sbf-overlay');
+  // ── Curvy neon SVG trace ─────────────────────────────────────────────────────
+  function sectionFlash(el) {
+    const old = el.querySelector('.sbf-svg');
     if (old) old.remove();
-    sectionEl.style.isolation = 'isolate';
-    const ov = document.createElement('div');
-    ov.className = 'sbf-overlay';
-    ov.innerHTML = '<div class="sbf-top"></div><div class="sbf-right"></div><div class="sbf-bottom"></div><div class="sbf-left"></div>';
-    sectionEl.appendChild(ov);
-    setTimeout(() => ov.classList.add('sbf-out'), 1350);
-    setTimeout(() => ov.remove(), 1850);
+    el.style.isolation = 'isolate';
+
+    const W = el.offsetWidth, H = el.offsetHeight;
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('class', 'sbf-svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:visible;opacity:1;transition:opacity .7s cubic-bezier(.16,1,.3,1);';
+
+    // Curvy border path: gentle sinusoidal waves on top/bottom
+    const wA = Math.min(18, H * 0.03); // wave amplitude
+    const p = 2;
+    const pathD = [
+      `M ${p},${p+wA}`,
+      `C ${W*0.15},${p-wA} ${W*0.35},${p+wA*1.5} ${W*0.5},${p}`,
+      `C ${W*0.65},${p-wA*1.2} ${W*0.85},${p+wA} ${W-p},${p+wA}`,
+      `L ${W-p},${H-p-wA}`,
+      `C ${W*0.85},${H+wA*0.8} ${W*0.65},${H-p-wA*1.5} ${W*0.5},${H-p}`,
+      `C ${W*0.35},${H+wA*1.2} ${W*0.15},${H-p-wA} ${p},${H-p-wA}`,
+      `Z`
+    ].join(' ');
+
+    const uid = 'ng' + Date.now();
+    const defs = document.createElementNS(ns, 'defs');
+    defs.innerHTML = `
+      <linearGradient id="${uid}" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+        <stop offset="20%" stop-color="#fff"/>
+        <stop offset="50%" stop-color="#93D2FF"/>
+        <stop offset="80%" stop-color="#6366f1"/>
+        <stop offset="100%" stop-color="rgba(99,102,241,0)"/>
+      </linearGradient>`;
+
+    const path = document.createElementNS(ns, 'path');
+    path.setAttribute('d', pathD);
+    path.setAttribute('class', 'sbf-path');
+    path.setAttribute('stroke', `url(#${uid})`);
+
+    svg.appendChild(defs);
+    svg.appendChild(path);
+    el.appendChild(svg);
+
+    // Measure then animate stroke-dashoffset
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    path.style.transition = `stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1)`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      path.style.strokeDashoffset = '0';
+    }));
+
+    setTimeout(() => { svg.style.opacity = '0'; }, 1800);
+    setTimeout(() => svg.remove(), 2550);
   }
+
   const neonObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
