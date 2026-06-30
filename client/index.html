@@ -21,6 +21,53 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
+  body{overflow-x:hidden;}
+  body.loading{overflow:hidden;}
+
+  /* LOADER */
+  #loader{
+    position:fixed; inset:0; z-index:9999;
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    flex-direction:column; gap:22px;
+    transition:opacity .6s cubic-bezier(.16,.84,.44,1), visibility 0s linear .6s;
+  }
+  #loader.done{opacity:0; visibility:hidden; pointer-events:none;}
+  .loader-mark{
+    font-family:"Iowan Old Style","Georgia",serif;
+    font-size:1.6rem; letter-spacing:0.02em;
+    color:var(--text);
+    opacity:0;
+    animation:loaderMarkIn .7s cubic-bezier(.16,.84,.44,1) .15s forwards;
+  }
+  .loader-mark .dot{color:var(--accent);}
+  @keyframes loaderMarkIn{
+    from{opacity:0; transform:translateY(6px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .loader-bar{
+    width:140px; height:1px; background:var(--line);
+    position:relative; overflow:hidden; border-radius:2px;
+  }
+  .loader-bar::after{
+    content:""; position:absolute; top:0; left:0; height:100%; width:40%;
+    background:var(--gold);
+    animation:loaderSweep 1.1s cubic-bezier(.45,0,.2,1) infinite;
+  }
+  @keyframes loaderSweep{
+    0%{left:-40%;}
+    100%{left:100%;}
+  }
+  .loader-label{
+    font-family:"Helvetica Neue","Segoe UI",sans-serif;
+    font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--muted);
+    opacity:0;
+    animation:loaderMarkIn .6s ease .3s forwards;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .loader-bar::after{animation:none; width:100%; left:0;}
+  }
   body{
     background:var(--bg);
     color:var(--text);
@@ -51,29 +98,28 @@
     }
 
     .stat-card, .proj-card, .exp-block, .edu-card, .skill-card{
-      transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+      transition:transform .35s cubic-bezier(.16,.84,.44,1), border-color .35s ease, box-shadow .35s ease;
     }
-    .stat-card:hover{transform:translateY(-4px); box-shadow:0 10px 24px -14px #b5562f55;}
-    .edu-card:hover{transform:translateY(-2px); border-color:var(--accent);}
-    .skill-card:hover{border-color:var(--accent); box-shadow:0 10px 28px -16px #b5562f55;}
-    .exp-block{transition:transform .25s ease, border-color .25s ease;}
-    .exp-block:hover{transform:translateY(-3px); border-color:var(--accent);}
-    .tag{transition:transform .2s ease, border-color .2s ease;}
-    .tag:hover{transform:translateY(-2px); border-color:var(--accent); color:var(--text);}
-    .impact-pill{transition:transform .2s ease;}
-    .impact-pill:hover{transform:scale(1.04);}
+    .stat-card:hover{transform:translateY(-3px); box-shadow:0 16px 32px -20px #a8461f44;}
+    .edu-card:hover{border-color:var(--gold);}
+    .skill-card:hover{border-color:var(--gold); box-shadow:0 16px 36px -22px #a8461f44;}
+    .exp-block{transition:transform .35s cubic-bezier(.16,.84,.44,1), border-color .35s ease;}
+    .exp-block:hover{transform:translateY(-2px); border-color:var(--gold);}
+    .tag{transition:transform .25s ease, border-color .25s ease, background .25s ease;}
+    .tag:hover{transform:translateY(-1px); border-color:var(--accent); color:var(--text);}
+    .impact-pill{transition:background .25s ease;}
+    .impact-pill:hover{background:var(--panel-2);}
 
-    .logo, nav a{transition:transform .2s ease, background .2s ease, color .2s ease;}
-    .logo:hover{transform:translateY(-1px);}
+    .logo, nav a{transition:transform .25s ease, background .25s ease, color .25s ease;}
+    .logo:hover{opacity:0.7;}
 
-    img{transition:transform .35s ease;}
-    .proj-imgs img:hover{transform:scale(1.03);}
+    img{transition:transform .5s cubic-bezier(.16,.84,.44,1);}
 
-    .btn{transition:transform .2s ease, background .2s ease, box-shadow .2s ease;}
-    .btn-primary:hover{box-shadow:0 8px 20px -8px #b5562f66;}
+    .btn{transition:transform .3s cubic-bezier(.16,.84,.44,1), background .3s ease, box-shadow .3s ease;}
+    .btn-primary:hover{box-shadow:0 14px 28px -12px #a8461f77;}
 
-    .contact-links a{transition:transform .2s ease, border-color .2s ease, color .2s ease;}
-    .contact-links a:hover{transform:translateY(-3px);}
+    .contact-links a{transition:transform .25s cubic-bezier(.16,.84,.44,1), border-color .25s ease, color .25s ease, background .25s ease;}
+    .contact-links a:hover{transform:translateY(-2px);}
   }
 
   section{padding:90px 24px; max-width:1100px; margin:0 auto;}
@@ -112,6 +158,7 @@
   .hero{
     padding:130px 24px 80px;
     text-align:left;
+    background:radial-gradient(ellipse 600px 380px at 10% 0%, #b08d3e1c, transparent 65%);
   }
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
@@ -189,6 +236,20 @@
     content:""; flex:1; height:1px;
     background:linear-gradient(to right, var(--line), transparent);
   }
+  section.section-arrive .sec-head h2{
+    animation:arriveText .7s cubic-bezier(.16,.84,.44,1);
+  }
+  section.section-arrive .sec-head::after{
+    animation:arriveLine .8s cubic-bezier(.16,.84,.44,1);
+  }
+  @keyframes arriveText{
+    0%{opacity:0.4; transform:translateX(-6px);}
+    100%{opacity:1; transform:translateX(0);}
+  }
+  @keyframes arriveLine{
+    0%{transform:scaleX(0); transform-origin:left;}
+    100%{transform:scaleX(1); transform-origin:left;}
+  }
 
   /* ABOUT */
   .about-card{
@@ -260,9 +321,17 @@
   }
   .proj-card p{color:var(--muted); font-size:0.92rem; margin-bottom:14px;}
   .proj-tag-line{color:var(--accent); font-size:0.86rem; font-style:italic; margin-bottom:18px;}
-  .proj-imgs{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px;}
-  .proj-imgs.single{grid-template-columns:1fr;}
-  .proj-imgs img{border:1px solid var(--line);}
+  .screenshots-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--panel-2); border:1px solid var(--line);
+    color:var(--accent); font-size:0.82rem; font-weight:500;
+    font-family:"Helvetica Neue","Segoe UI",sans-serif;
+    padding:9px 16px; border-radius:999px;
+    cursor:pointer; margin-bottom:18px; width:fit-content;
+    transition:transform .25s cubic-bezier(.16,.84,.44,1), border-color .25s ease, background .25s ease;
+  }
+  .screenshots-btn:hover{transform:translateY(-1px); border-color:var(--gold); background:var(--panel);}
+  .screenshots-btn svg{flex-shrink:0;}
   .tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;}
   .tag{
     font-size:0.74rem; background:var(--panel-2); color:var(--muted);
@@ -336,27 +405,176 @@
     .proj-grid{grid-template-columns:1fr;}
     .skills-grid{grid-template-columns:1fr;}
   }
+
+  @media (max-width:600px){
+    section{padding:64px 20px;}
+    .nav-wrap{padding:14px 20px;}
+    .logo{font-size:1rem;}
+    .hero{padding:96px 20px 56px;}
+    .hero h1{font-size:clamp(2.1rem, 9vw, 2.7rem); line-height:1.12;}
+    .hero .role{font-size:1rem;}
+    .hero p.desc{font-size:0.98rem;}
+    .eyebrow{font-size:0.7rem; margin-bottom:22px;}
+
+    .btn-row{flex-direction:column; gap:10px;}
+    .btn{width:100%; text-align:center; padding:15px 24px;}
+
+    .social-row{gap:16px;}
+
+    .stats{grid-template-columns:1fr 1fr; gap:12px; margin-top:44px;}
+    .stat-card{padding:22px 14px;}
+    .stat-card .num{font-size:1.5rem;}
+    .stat-card .label{font-size:0.72rem; line-height:1.4;}
+
+    .sec-head{margin-bottom:28px; gap:12px;}
+    .sec-head h2{font-size:1.5rem;}
+    .sec-num{font-size:0.68rem;}
+
+    .about-card{padding:26px 22px; font-size:0.96rem;}
+
+    .exp-card{padding:24px 20px;}
+    .exp-top h3{font-size:1.1rem;}
+    .exp-block{padding:20px 18px;}
+    .impact-row{grid-template-columns:1fr 1fr;}
+    .impact-pill{padding:14px 10px;}
+    .impact-pill .n{font-size:1rem;}
+
+    .proj-card{padding:22px 20px;}
+    .proj-card h3{font-size:1.08rem;}
+    .proj-head{flex-direction:column; align-items:start; gap:4px;}
+    .screenshots-btn{width:100%; justify-content:center;}
+    .proj-links{flex-direction:column; gap:10px;}
+
+    .skill-card{padding:24px 20px;}
+
+    .edu-card{padding:18px 20px; flex-direction:column; align-items:start; gap:6px;}
+    .edu-card .year{order:-1; font-size:0.74rem;}
+
+    .award-card{padding:18px 20px; font-size:0.88rem;}
+
+    .contact-card{padding:38px 22px;}
+    .contact-card h2{font-size:1.6rem;}
+    .contact-card p{font-size:0.92rem;}
+    .contact-links{flex-direction:column; width:100%; gap:10px;}
+    .contact-links a{width:100%; text-align:center;}
+
+    footer{padding:30px 20px; font-size:0.72rem;}
+
+    .lb-img-wrap img{max-height:62vh;}
+    .lb-caption{font-size:0.78rem; padding:0 40px;}
+  }
   @media (max-width:700px){
     nav ul{
-      position:fixed; top:64px; left:0; right:0;
-      flex-direction:column; background:var(--bg);
+      position:fixed; top:58px; left:0; right:0;
+      flex-direction:column; background:rgba(246,240,230,0.97);
+      backdrop-filter:blur(16px);
       border-bottom:1px solid var(--line);
-      padding:16px 24px; gap:4px;
-      transform:translateY(-150%); transition:transform .25s;
+      padding:20px 24px 26px; gap:2px;
+      transform:translateY(-12px) scale(0.98);
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:transform .35s cubic-bezier(.16,.84,.44,1), opacity .3s ease, visibility 0s linear .35s;
+      box-shadow:0 24px 50px -30px #2c211855;
     }
-    nav ul.open{transform:translateY(0);}
-    .nav-toggle{display:block;}
+    nav ul.open{
+      transform:translateY(0) scale(1);
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+      transition:transform .4s cubic-bezier(.16,.84,.44,1), opacity .35s ease;
+    }
+    nav ul li{
+      opacity:0; transform:translateY(-8px);
+      transition:opacity .35s ease, transform .35s ease;
+    }
+    nav ul.open li{opacity:1; transform:translateY(0);}
+    nav ul.open li:nth-child(1){transition-delay:.05s;}
+    nav ul.open li:nth-child(2){transition-delay:.09s;}
+    nav ul.open li:nth-child(3){transition-delay:.13s;}
+    nav ul.open li:nth-child(4){transition-delay:.17s;}
+    nav ul.open li:nth-child(5){transition-delay:.21s;}
+    nav ul.open li:nth-child(6){transition-delay:.25s;}
+    .nav-toggle{display:flex; flex-direction:column; justify-content:center; gap:5px; width:26px; height:22px;}
+    .nav-toggle span{
+      display:block; width:100%; height:1.5px; background:var(--text);
+      transition:transform .3s cubic-bezier(.16,.84,.44,1), opacity .2s ease;
+      transform-origin:center;
+    }
+    .nav-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
     nav a{display:block; border-radius:var(--r-sm);}
-    .proj-imgs{grid-template-columns:1fr;}
+  }
+
+  /* LIGHTBOX */
+  #lightbox{
+    position:fixed; inset:0; z-index:9000;
+    background:#1c140dee;
+    backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .35s ease, visibility 0s linear .35s;
+  }
+  #lightbox.open{
+    opacity:1; visibility:visible; pointer-events:auto;
+    transition:opacity .35s ease;
+  }
+  .lb-inner{
+    max-width:min(92vw, 1100px); max-height:88vh;
+    display:flex; flex-direction:column; align-items:center; gap:16px;
+    padding:0 20px;
+  }
+  .lb-img-wrap{
+    position:relative; max-height:74vh; display:flex; align-items:center; justify-content:center;
+  }
+  .lb-img-wrap img{
+    max-height:74vh; max-width:100%; width:auto; height:auto;
+    border-radius:var(--r-md);
+    box-shadow:0 30px 70px -20px #00000066;
+    opacity:0; transform:scale(0.97);
+    transition:opacity .3s ease, transform .3s cubic-bezier(.16,.84,.44,1);
+    border:1px solid #ffffff22;
+  }
+  .lb-img-wrap img.show{opacity:1; transform:scale(1);}
+  .lb-caption{
+    color:#f3e7d8; font-family:"Helvetica Neue","Segoe UI",sans-serif;
+    font-size:0.85rem; text-align:center; letter-spacing:0.02em;
+  }
+  .lb-caption .lb-count{color:#cbb796; margin-left:8px;}
+  .lb-close, .lb-prev, .lb-next{
+    position:absolute;
+    background:#ffffff14; border:1px solid #ffffff2e;
+    color:#f3e7d8; border-radius:50%;
+    width:42px; height:42px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .lb-close:hover, .lb-prev:hover, .lb-next:hover{background:#ffffff26;}
+  .lb-close{top:22px; right:22px;}
+  .lb-prev{left:14px; top:50%; transform:translateY(-50%);}
+  .lb-next{right:14px; top:50%; transform:translateY(-50%);}
+  .lb-prev:hover, .lb-next:hover{transform:translateY(-50%) scale(1.06);}
+  @media (max-width:700px){
+    .lb-prev{left:6px;}
+    .lb-next{right:6px;}
+    .lb-close{top:14px; right:14px; width:38px; height:38px;}
   }
 </style>
 </head>
-<body>
+<body class="loading">
+
+<div id="loader">
+  <div class="loader-mark">Aayush Dhiman<span class="dot">.</span></div>
+  <div class="loader-bar"></div>
+  <div class="loader-label">Business Operations</div>
+</div>
 
 <header>
   <div class="nav-wrap">
     <a href="#" class="logo">Aayush Dhiman</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     <nav>
       <ul id="navList">
         <li><a href="#about">About</a></li>
@@ -467,10 +685,12 @@
       <div class="proj-head"><h3>CurryIT Attendance System</h3><span class="proj-year">2026</span></div>
       <p>Live attendance app with geolocation check-in, leave workflows, and role-based access for employees, managers, and admins. Also built a self-contained version with JWT auth.</p>
       <div class="proj-tag-line">Replaced manual attendance with one source of truth.</div>
-      <div class="proj-imgs">
-        <img src="https://aayushdhiman.vercel.app/img/attendance%20portal%201.png" alt="Attendance System login screen">
-        <img src="https://aayushdhiman.vercel.app/img/Attendance%20portal%202.png" alt="Attendance System dashboard">
-      </div>
+      <button class="screenshots-btn" type="button"
+        data-gallery='["https://aayushdhiman.vercel.app/img/attendance%20portal%201.png","https://aayushdhiman.vercel.app/img/Attendance%20portal%202.png"]'
+        data-title="CurryIT Attendance System">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+        View screenshots (2)
+      </button>
       <div class="tags"><span class="tag">Firebase</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Supabase</span></div>
     </div>
 
@@ -478,9 +698,12 @@
       <div class="proj-head"><h3>Dispatch Analytics Dashboard</h3><span class="proj-year">2026</span></div>
       <p>Turns raw dispatch Excel exports into a single shareable dashboard: shipped-quantity trends, brand/warehouse breakdowns, status tracking across Blinkit, Swiggy, Zepto, BigBasket & FirstClub.</p>
       <div class="proj-tag-line">One HTML file, zero installs — opens anywhere.</div>
-      <div class="proj-imgs single">
-        <img src="https://aayushdhiman.vercel.app/img/dispatch%20dashboad.png" alt="Dispatch Analytics Dashboard">
-      </div>
+      <button class="screenshots-btn" type="button"
+        data-gallery='["https://aayushdhiman.vercel.app/img/dispatch%20dashboad.png"]'
+        data-title="Dispatch Analytics Dashboard">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+        View screenshot
+      </button>
       <div class="tags"><span class="tag">Chart.js</span><span class="tag">Excel</span><span class="tag">HTML</span></div>
     </div>
 
@@ -488,9 +711,12 @@
       <div class="proj-head"><h3>Box Sticker Generator</h3><span class="proj-year">2026</span></div>
       <p>Reads warehouse Excel sheets and auto-generates branded A5 box stickers as print-ready PDFs.</p>
       <div class="proj-tag-line">Cuts manual sticker-making out of dispatch.</div>
-      <div class="proj-imgs single">
-        <img src="https://aayushdhiman.vercel.app/img/box%20sticker%20genrator.png" alt="Box Sticker Generator">
-      </div>
+      <button class="screenshots-btn" type="button"
+        data-gallery='["https://aayushdhiman.vercel.app/img/box%20sticker%20genrator.png"]'
+        data-title="Box Sticker Generator">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>
+        View screenshot
+      </button>
       <div class="tags"><span class="tag">HTML/JS</span><span class="tag">Excel parsing</span><span class="tag">PDF gen</span></div>
     </div>
 
@@ -586,11 +812,48 @@
 
 <footer>© 2026 Aayush Dhiman</footer>
 
+<div id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="lb-inner">
+    <div class="lb-img-wrap">
+      <img id="lbImg" src="" alt="">
+    </div>
+    <div class="lb-caption"><span id="lbTitle"></span><span class="lb-count" id="lbCount"></span></div>
+  </div>
+  <button class="lb-close" id="lbClose" aria-label="Close">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <button class="lb-prev" id="lbPrev" aria-label="Previous">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="lb-next" id="lbNext" aria-label="Next">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+</div>
+
 <script>
   const toggle = document.getElementById('navToggle');
   const navList = document.getElementById('navList');
-  toggle.addEventListener('click', () => navList.classList.toggle('open'));
-  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navList.classList.remove('open')));
+  toggle.addEventListener('click', () => {
+    navList.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', (e) => {
+    navList.classList.remove('open');
+    toggle.classList.remove('open');
+
+    const targetId = a.getAttribute('href');
+    const target = document.querySelector(targetId);
+    if (target){
+      e.preventDefault();
+      navList.classList.remove('open');
+      toggle.classList.remove('open');
+      setTimeout(() => {
+        target.scrollIntoView({ behavior:'smooth', block:'start' });
+        target.classList.add('section-arrive');
+        setTimeout(() => target.classList.remove('section-arrive'), 900);
+      }, 60);
+    }
+  }));
 
   // Tag elements for scroll-reveal
   const revealSelectors = [
@@ -620,6 +883,112 @@
   document.querySelectorAll('.proj-card').forEach((card, i) => {
     card.style.transitionDelay = (i % 2) * 0.08 + 's';
   });
+
+  // LOADER — dismiss once page (and images) are ready, with a graceful minimum/maximum dwell
+  (function(){
+    const loader = document.getElementById('loader');
+    const minDwell = 700;
+    const maxDwell = 2800;
+    const start = Date.now();
+    let dismissed = false;
+
+    function dismiss(){
+      if (dismissed) return;
+      dismissed = true;
+      const elapsed = Date.now() - start;
+      const wait = Math.max(0, minDwell - elapsed);
+      setTimeout(() => {
+        loader.classList.add('done');
+        document.body.classList.remove('loading');
+      }, wait);
+    }
+
+    if (document.readyState === 'complete'){
+      dismiss();
+    } else {
+      window.addEventListener('load', dismiss);
+    }
+    // safety net in case load event is delayed by slow assets
+    setTimeout(dismiss, maxDwell);
+  })();
+
+  // LIGHTBOX — fullscreen screenshot viewer
+  (function(){
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbCount = document.getElementById('lbCount');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+
+    let images = [];
+    let title = '';
+    let index = 0;
+
+    function render(){
+      lbImg.classList.remove('show');
+      const src = images[index];
+      const img = new Image();
+      img.onload = () => {
+        lbImg.src = src;
+        requestAnimationFrame(() => lbImg.classList.add('show'));
+      };
+      img.src = src;
+      lbTitle.textContent = title;
+      lbCount.textContent = images.length > 1 ? ` ${index + 1} / ${images.length}` : '';
+      const multi = images.length > 1;
+      lbPrev.style.display = multi ? 'flex' : 'none';
+      lbNext.style.display = multi ? 'flex' : 'none';
+    }
+
+    function open(imgList, t, startIndex){
+      images = imgList; title = t; index = startIndex || 0;
+      render();
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function next(){ index = (index + 1) % images.length; render(); }
+    function prev(){ index = (index - 1 + images.length) % images.length; render(); }
+
+    document.querySelectorAll('.screenshots-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const list = JSON.parse(btn.getAttribute('data-gallery'));
+        const t = btn.getAttribute('data-title') || '';
+        open(list, t, 0);
+      });
+    });
+
+    lbClose.addEventListener('click', close);
+    lbNext.addEventListener('click', next);
+    lbPrev.addEventListener('click', prev);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+
+    // basic swipe support
+    let touchStartX = null;
+    lightbox.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+    lightbox.addEventListener('touchend', (e) => {
+      if (touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { dx > 0 ? prev() : next(); }
+      touchStartX = null;
+    });
+  })();
 </script>
 
 </body>
