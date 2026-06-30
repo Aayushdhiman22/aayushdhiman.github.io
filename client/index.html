@@ -60,10 +60,10 @@
 ═══════════════════════════════════════ */
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
 html { font-size:16px; }
-body { background:var(--bg); color:var(--ink); font-family:var(--f-b); line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden; cursor:none; }
+body { background:var(--bg); color:var(--ink); font-family:var(--f-b); line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
 a { color:inherit; text-decoration:none; }
 img { display:block; max-width:100%; }
-button { font-family:inherit; cursor:none; }
+button { font-family:inherit; }
 h1,h2,h3,h4 { font-family:var(--f-d); letter-spacing:-.03em; }
 .wrap { max-width:var(--w); margin:0 auto; padding:0 48px; }
 
@@ -72,26 +72,6 @@ body, nav, section, footer, .card, .proj-card, .exp-item, .edu-card, .stat-cell 
   transition: background-color .35s ease, border-color .35s ease, color .35s ease;
 }
 
-/* ═══════════════════════════════════════
-   CURSOR
-═══════════════════════════════════════ */
-#cur-dot {
-  position:fixed; top:0; left:0; z-index:99999;
-  width:5px; height:5px; border-radius:50%; background:var(--acc);
-  pointer-events:none; transform:translate(-50%,-50%);
-  transition:width .2s var(--ease), height .2s var(--ease), opacity .2s;
-}
-#cur-ring {
-  position:fixed; top:0; left:0; z-index:99998;
-  width:32px; height:32px; border-radius:50%;
-  border:1.5px solid rgba(255,77,0,.45);
-  pointer-events:none; transform:translate(-50%,-50%);
-  transition:width .4s var(--ease), height .4s var(--ease), border-color .3s, opacity .3s;
-  will-change:transform;
-}
-.hovering #cur-dot  { width:9px; height:9px; }
-.hovering #cur-ring { width:48px; height:48px; border-color:rgba(255,77,0,.7); }
-@media(pointer:coarse){ #cur-dot,#cur-ring{display:none;} body,button{cursor:auto;} }
 
 /* ═══════════════════════════════════════
    SCROLL BAR + SECTION DOTS
@@ -109,7 +89,7 @@ body, nav, section, footer, .card, .proj-card, .exp-item, .edu-card, .stat-cell 
   width:5px; height:5px; border-radius:50%;
   background:var(--faint); border:none; padding:0;
   transition:background .3s ease, transform .3s var(--ease), height .35s var(--ease);
-  cursor:none;
+  cursor:pointer;
 }
 .sdot.on { background:var(--acc); height:18px; border-radius:3px; }
 @media(max-width:768px){ #sec-dots{display:none;} }
@@ -223,8 +203,8 @@ nav {
 .hero::after {
   content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
   background:
-    radial-gradient(ellipse 50% 60% at 3% 55%, rgba(255,77,0,.09) 0%, transparent 55%),
-    radial-gradient(ellipse 35% 45% at 90% 10%, rgba(255,77,0,.05) 0%, transparent 50%);
+    radial-gradient(ellipse 40% 40% at 3% 90%, rgba(255,77,0,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 30% at 92% 8%, rgba(255,77,0,.04) 0%, transparent 55%);
 }
 
 #hero-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
@@ -284,7 +264,7 @@ nav {
   display:inline-flex; align-items:center; gap:8px;
   font-size:13.5px; font-weight:700; border-radius:7px; border:none;
   transition:transform .3s var(--ease), opacity .2s, background .2s, border-color .2s, color .2s;
-  cursor:none; font-family:var(--f-b);
+  font-family:var(--f-b);
 }
 .btn:hover { transform:translateY(-2px); }
 .btn-solid { background:var(--ink); color:var(--bg); padding:13px 26px; }
@@ -648,8 +628,6 @@ footer {
   footer { padding:76px 0 40px; }
   .foot-bottom { flex-direction:column; align-items:flex-start; }
 
-  #cur-dot, #cur-ring { display:none; }
-  body, button { cursor:auto; }
 }
 @media(max-width:480px) {
   .hero-h1 { font-size:48px; }
@@ -666,8 +644,6 @@ footer {
 </head>
 <body>
 
-<div id="cur-dot"></div>
-<div id="cur-ring"></div>
 <div id="scroll-bar"></div>
 <nav id="sec-dots" aria-hidden="true"></nav>
 
@@ -1104,23 +1080,6 @@ new IntersectionObserver(ents=>{
   },{rootMargin:'-40% 0px -40% 0px'}).observe(el);
 });
 
-/* ── cursor ── */
-const dot=$('#cur-dot'), ring=$('#cur-ring');
-if(dot&&ring&&matchMedia('(pointer:fine)').matches){
-  let mx=-200,my=-200,rx=-200,ry=-200;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
-  document.addEventListener('mousedown',()=>dot.style.transform='translate(-50%,-50%) scale(.6)');
-  document.addEventListener('mouseup',()=>dot.style.transform='');
-  const interEl='a,button,.chip,.about-chip,.proj-row,.edu-card,.proj-featured,.stat-cell,.soc-btn,.contact-row';
-  document.addEventListener('mouseover',e=>{ if(e.target.closest(interEl)) document.body.classList.add('hovering'); });
-  document.addEventListener('mouseout',e=>{ if(e.target.closest(interEl)) document.body.classList.remove('hovering'); });
-  (function tick(){
-    dot.style.left=mx+'px'; dot.style.top=my+'px';
-    rx=lerp(rx,mx,.1); ry=lerp(ry,my,.1);
-    ring.style.left=rx+'px'; ring.style.top=ry+'px';
-    requestAnimationFrame(tick);
-  })();
-}
 
 /* ── nav ── */
 const ham=$('#ham'), navUl=$('#nav-links');
