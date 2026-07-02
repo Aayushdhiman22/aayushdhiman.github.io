@@ -3,8 +3,37 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Aayush Dhiman — Business Operations, CURRYiT</title>
-<meta name="description" content="Assistant Manager, Business Operations at CURRYiT. Managing D2C & B2B fulfilment across 50+ warehouses, and building the dashboards and automations that keep it running." />
+<title>Aayush Dhiman — Operations, GlobalBees</title>
+<meta name="description" content="Sr. Associate – Operations at GlobalBees (Brainbees Group). D2C & B2B fulfilment, warehouse operations, and the dashboards & automations that keep it all running." />
+<link rel="canonical" href="https://aayushdhiman.vercel.app/" />
+<meta name="theme-color" content="#e7ebf1" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://aayushdhiman.vercel.app/" />
+<meta property="og:title" content="Aayush Dhiman — Operations, GlobalBees" />
+<meta property="og:description" content="D2C & B2B fulfilment, warehouse operations, and the dashboards & automations that keep it all running." />
+<meta property="og:image" content="https://aayushdhiman.vercel.app/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Aayush Dhiman — Operations, GlobalBees" />
+<meta name="twitter:description" content="D2C & B2B fulfilment, warehouse operations, and the dashboards & automations that keep it all running." />
+<meta name="twitter:image" content="https://aayushdhiman.vercel.app/og-image.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Aayush Dhiman",
+  "jobTitle": "Senior Associate – Operations",
+  "worksFor": { "@type": "Organization", "name": "GlobalBees" },
+  "address": { "@type": "PostalAddress", "addressRegion": "Delhi NCR", "addressCountry": "IN" },
+  "email": "mailto:aayushdhimanok@gmail.com",
+  "url": "https://aayushdhiman.vercel.app/",
+  "sameAs": [
+    "https://www.linkedin.com/in/aayushdiman22/",
+    "https://github.com/Aayushdhiman22"
+  ]
+}
+</script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="apple-touch-icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -288,6 +317,49 @@
   .rv{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
   .rv.in{opacity:1;transform:none}
 
+  /* ── nav: active link + hamburger ── */
+  .nav .links a.active{color:var(--accent);
+    box-shadow:inset 3px 3px 7px var(--sd), inset -3px -3px 7px var(--sl)}
+  .nav .burger{display:none;width:42px;height:42px;border-radius:50%;border:0;cursor:pointer;
+    background:var(--bg);color:var(--ink);align-items:center;justify-content:center;flex:none;
+    box-shadow:4px 4px 9px var(--sd), -4px -4px 9px var(--sl);transition:all .2s}
+  .nav .burger:hover{box-shadow:inset 3px 3px 6px var(--sd), inset -3px -3px 6px var(--sl)}
+  .nav .burger svg{width:18px;height:18px}
+  .nav .burger .ic-x{display:none}
+  .nav .burger.open .ic-bars{display:none}
+  .nav .burger.open .ic-x{display:block}
+  @media(max-width:900px){.nav .burger{display:flex}}
+
+  .mmenu{position:fixed;top:94px;left:20px;right:20px;z-index:49;
+    background:var(--bg);border-radius:var(--r-lg);padding:14px;
+    box-shadow:12px 12px 26px var(--sd), -10px -10px 22px var(--sl);
+    opacity:0;transform:translateY(-12px);pointer-events:none;
+    transition:opacity .28s, transform .28s}
+  .mmenu.open{opacity:1;transform:none;pointer-events:auto}
+  .mmenu a{display:block;padding:14px 18px;border-radius:var(--r-sm);font-size:15px;
+    font-weight:600;color:var(--ink);transition:all .2s}
+  .mmenu a:hover, .mmenu a.active{color:var(--accent);
+    box-shadow:inset 3px 3px 7px var(--sd), inset -3px -3px 7px var(--sl)}
+  @media(min-width:901px){.mmenu{display:none}}
+
+  /* ── experience: current-role badge ── */
+  .now{display:inline-flex;align-items:center;gap:7px;margin-left:12px;padding:5px 12px;
+    border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--accent);vertical-align:middle;
+    box-shadow:inset 2.5px 2.5px 5px var(--sd), inset -2.5px -2.5px 5px var(--sl)}
+  .now::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);
+    animation:dotpulse 2.4s ease-in-out infinite}
+  .role-card + .role-card, .role-card.gap{margin-top:20px}
+
+  /* ── back to top ── */
+  .totop{position:fixed;right:22px;bottom:22px;z-index:48;width:48px;height:48px;
+    border-radius:50%;border:0;cursor:pointer;background:var(--bg);color:var(--accent);
+    font-size:18px;box-shadow:6px 6px 13px var(--sd), -6px -6px 13px var(--sl);
+    opacity:0;transform:translateY(14px);pointer-events:none;
+    transition:opacity .3s, transform .3s, box-shadow .2s}
+  .totop.show{opacity:1;transform:none;pointer-events:auto}
+  .totop:hover{box-shadow:inset 4px 4px 8px var(--sd), inset -4px -4px 8px var(--sl)}
+
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
     .rv{opacity:1;transform:none}
@@ -310,18 +382,31 @@
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
         <a class="pill" href="#contact">Contact</a>
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+          <svg class="ic-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
       </nav>
     </div>
   </header>
 </div>
+
+<nav class="mmenu" id="mmenu" aria-label="Mobile menu">
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#skills">Skills</a>
+  <a href="#education">Education</a>
+  <a href="#contact">Contact</a>
+</nav>
 
 <main id="top">
   <section class="hero">
     <div class="shell">
       <span class="eyebrow flat rv">Business Operations · Delhi NCR</span>
       <h1 class="rv">Aayush Dhiman</h1>
-      <div class="role rv">Assistant Manager, Business Operations — CURRYiT</div>
-      <p class="sub rv">I manage D2C and B2B fulfilment across 50+ warehouses on quick-commerce platforms, and build the dashboards, sheets, and small tools that keep operations running without manual firefighting.</p>
+      <div class="role rv">Sr. Associate – Operations — GlobalBees</div>
+      <p class="sub rv">I run brand operations at GlobalBees, a D2C brand aggregator under the Brainbees (FirstCry) group — and I build the dashboards, sheets, and small tools that keep fulfilment running without manual firefighting. Previously scaled ops across 50+ warehouses at CURRYiT.</p>
       <div class="actions rv">
         <a class="btn btn-primary" href="#projects">View Projects <span class="arr">&#8594;</span></a>
         <a class="btn btn-ghost" href="#contact">Get in Touch</a>
@@ -345,8 +430,9 @@
   <section class="sec" id="about">
     <div class="shell about">
       <span class="eyebrow flat rv"><span class="num">01</span> About</span>
-      <p class="rv" style="margin-top:24px">I'm an Assistant Manager – Business Operations at CURRYiT, where I manage end-to-end D2C order fulfilment and B2B logistics across platforms like Blinkit, Zepto, Swiggy Instamart, BigBasket, Amazon, and FirstClub. Day to day, that means dispatch planning, vendor and warehouse coordination, and tracking KPIs like OFD delays, RTO reasons, and missing GRNs.</p>
-      <p class="rv">I also build the tools that make that process lighter — Google Apps Script automations, tracking sheets, and small dashboards — whenever a manual process becomes repetitive enough to fix properly.</p>
+      <p class="rv" style="margin-top:24px">I'm a Sr. Associate – Operations at GlobalBees, a D2C brand aggregator under the Brainbees (FirstCry) group, where I own day-to-day operations for Kuber Industries — one of the brands in the portfolio. That means fulfilment planning, warehouse and processing-centre coordination, and keeping brand KPIs visible and on track.</p>
+      <p class="rv">Before this, I was Assistant Manager – Business Operations at CURRYiT, managing end-to-end D2C fulfilment and B2B logistics across 50+ warehouses on Blinkit, Zepto, Swiggy Instamart, BigBasket, Amazon, and FirstClub.</p>
+      <p class="rv">Wherever I work, I build the tools that make the process lighter — script automations, tracking sheets, and single-file dashboards — whenever a manual process becomes repetitive enough to fix properly.</p>
     </div>
   </section>
 
@@ -355,8 +441,23 @@
       <span class="eyebrow flat rv"><span class="num">02</span> Experience</span>
 
       <div class="role-card raised rv">
+        <h3>Sr. Associate — Operations <span class="now">Current</span></h3>
+        <div class="meta">GlobalBees (Brainbees Group) &middot; Delhi NCR &middot; Jun 2026 &mdash; Present</div>
+        <div class="kit" style="margin-top:22px;grid-template-columns:1fr">
+          <div class="col pressed">
+            <h3>Brand Operations</h3>
+            <ul>
+              <li>Own day-to-day operations for Kuber Industries, a home &amp; kitchen brand in the GlobalBees portfolio</li>
+              <li>Fulfilment planning and coordination with the processing centre through the in-house WMS</li>
+              <li>Bringing the automation playbook to Excel Online with Office Scripts for reporting workflows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="role-card raised rv gap">
         <h3>Assistant Manager — Business Operations</h3>
-        <div class="meta">CURRYiT &middot; Delhi NCR &middot; Dec 2024 &mdash; Present</div>
+        <div class="meta">CURRYiT &middot; Delhi NCR &middot; Dec 2024 &mdash; Jun 2026</div>
       </div>
 
       <div class="kit rv">
@@ -404,9 +505,21 @@
       <div class="work">
 
         <div class="proj raised rv">
+          <div class="top"><span class="ix">Flagship</span><span class="yr">2026</span></div>
+          <h3>PO Dispatch System</h3>
+          <p>End-to-end system managing the B2B purchase-order lifecycle — PO intake, dispatch planning, documentation, and status tracking — built on Google Apps Script and Sheets.</p>
+          <div class="tagline">The single system 500&#8211;600 POs/month ran through.</div>
+          <div class="tags"><span>Apps Script</span><span>Google Sheets</span><span>HTML</span></div>
+          <button class="shots-btn" data-key="podispatch" data-title="PO Dispatch System">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.2"/><path d="M8 5l1.5-2h5L16 5"/></svg>
+            View Screenshots
+          </button>
+        </div>
+
+        <div class="proj raised rv">
           <div class="top"><span class="ix">Portfolio</span><span class="yr">2026</span></div>
           <h3>This Portfolio</h3>
-          <p>Designed and built this portfolio site from scratch — a single-file dark minimal HTML/CSS/JS site with scroll animations, mobile hamburger nav, animated stat counters, and project showcases. Hosted on Vercel via GitHub.</p>
+          <p>Designed and built this portfolio site from scratch — a single-file neumorphic HTML/CSS/JS site with soft-UI shadows, scroll reveals, a mobile menu, screenshot lightbox, and a no-backend contact form. Hosted on Vercel.</p>
           <div class="tagline">Built with Claude AI, deployed in hours.</div>
           <div class="tags"><span>HTML / CSS / JS</span><span>Claude AI</span><span>GitHub</span><span>Vercel</span></div>
           <div class="plinks">
@@ -501,12 +614,14 @@
       <div class="kit k2 rv">
         <div class="col raised"><h3>Operations</h3><ul>
           <li>MIS Reporting &amp; Dashboarding</li><li>Demand Planning</li>
-          <li>D2C &amp; B2B Logistics</li><li>Supply Chain Coordination</li>
-          <li>KPI Tracking</li><li>Process Automation</li><li>Stakeholder Coordination</li></ul></div>
+          <li>D2C &amp; B2B Logistics</li><li>Warehouse &amp; WMS Operations</li>
+          <li>Supply Chain Coordination</li><li>KPI Tracking</li>
+          <li>Process Automation</li><li>Stakeholder Coordination</li></ul></div>
         <div class="col raised"><h3>Tools &amp; Tech</h3><ul>
-          <li>Advanced Excel</li><li>Google Sheets</li><li>Google Apps Script</li>
-          <li>Shiprocket Cargo</li><li>Amazon Seller Central</li><li>Firebase</li>
-          <li>React / TypeScript</li><li>AI Tools (ChatGPT, Gemini, Claude)</li></ul></div>
+          <li>Advanced Excel &amp; Office Scripts</li><li>Google Sheets &amp; Apps Script</li>
+          <li>Shiprocket Cargo</li><li>Amazon Seller Central</li>
+          <li>React / TypeScript</li><li>Firebase &amp; Supabase</li>
+          <li>Vercel</li><li>AI Tools (Claude, ChatGPT, Gemini)</li></ul></div>
       </div>
     </div>
   </section>
@@ -588,6 +703,8 @@
   </div>
 </div>
 
+<button class="totop" id="toTop" aria-label="Back to top">&#8593;</button>
+
 <footer>
   <p>&copy; 2026 Aayush Dhiman</p>
 </footer>
@@ -605,11 +722,64 @@
     document.querySelectorAll('.hero .rv').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),120+i*100));
   });
 
+  // ── mobile hamburger menu ──
+  const burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  function menuToggle(force){
+    const open=typeof force==='boolean'?force:!mmenu.classList.contains('open');
+    mmenu.classList.toggle('open',open);
+    burger.classList.toggle('open',open);
+    burger.setAttribute('aria-expanded',open);
+    burger.setAttribute('aria-label',open?'Close menu':'Open menu');
+  }
+  burger.addEventListener('click',()=>menuToggle());
+  mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menuToggle(false)));
+  addEventListener('keydown',e=>{ if(e.key==='Escape'&&mmenu.classList.contains('open')) menuToggle(false); });
+  addEventListener('scroll',()=>{ if(mmenu.classList.contains('open')) menuToggle(false); },{passive:true});
+
+  // ── scrollspy: highlight current section in nav ──
+  const spyLinks=[...document.querySelectorAll('.nav .links a[href^="#"], .mmenu a[href^="#"]')];
+  const spySections=[...new Set(spyLinks.map(a=>a.getAttribute('href')))]
+    .map(h=>document.querySelector(h)).filter(Boolean);
+  const spy=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting)return;
+      const id='#'+e.target.id;
+      spyLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===id&&!a.classList.contains('pill')));
+    });
+  },{rootMargin:'-35% 0px -55% 0px'});
+  spySections.forEach(s=>spy.observe(s));
+
+  // ── animated stat counters ──
+  const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function countUp(el){
+    const final=el.textContent;
+    const tokens=final.split(/(\d+)/);
+    const dur=1100, t0=performance.now();
+    function frame(t){
+      const p=Math.min((t-t0)/dur,1), ease=1-Math.pow(1-p,3);
+      el.textContent=tokens.map(tk=>/^\d+$/.test(tk)?Math.round(+tk*ease):tk).join('');
+      if(p<1)requestAnimationFrame(frame); else el.textContent=final;
+    }
+    requestAnimationFrame(frame);
+  }
+  if(!reduceMotion){
+    const cio=new IntersectionObserver(es=>es.forEach(e=>{
+      if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target);}
+    }),{threshold:0.5});
+    document.querySelectorAll('.stat .v').forEach(el=>cio.observe(el));
+  }
+
+  // ── back to top ──
+  const toTop=document.getElementById('toTop');
+  addEventListener('scroll',()=>toTop.classList.toggle('show',scrollY>600),{passive:true});
+  toTop.addEventListener('click',()=>scrollTo({top:0,behavior:reduceMotion?'auto':'smooth'}));
+
   // ── screenshot lightbox ──
   // Drop real screenshots into an /images/ folder next to index.html and
   // list the filenames here — the gallery picks them up automatically.
   // Missing/unlisted files fall back to a friendly "coming soon" placeholder.
   const PROJECT_SHOTS = {
+    podispatch:  ['images/podispatch-1.jpg','images/podispatch-2.jpg'],
     portfolio:   ['images/portfolio-1.jpg','images/portfolio-2.jpg','images/portfolio-3.jpg'],
     attendance:  [
       'https://raw.githubusercontent.com/Aayushdhiman22/aayushdhiman.github.io/main/client/img/attendance%20portal%201.png',
@@ -684,6 +854,13 @@
     if(e.key==='ArrowLeft') lbStep(-1);
     if(e.key==='ArrowRight') lbStep(1);
   });
+  let swipeX=null;
+  lbOverlay.addEventListener('touchstart',e=>{ swipeX=e.touches[0].clientX; },{passive:true});
+  lbOverlay.addEventListener('touchend',e=>{
+    if(swipeX===null)return;
+    const dx=e.changedTouches[0].clientX-swipeX; swipeX=null;
+    if(Math.abs(dx)>50) lbStep(dx<0?1:-1);
+  },{passive:true});
 
   // ── contact form (Web3Forms — free, no backend needed) ──
   // 1. Go to web3forms.com, enter your email, verify it.
